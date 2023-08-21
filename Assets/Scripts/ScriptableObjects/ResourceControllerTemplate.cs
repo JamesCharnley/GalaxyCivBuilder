@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "RC_Template", menuName = "ScriptableObjects/ResourceController")]
 public class ResourceControllerTemplate : ScriptableObject
 {
     public List<ResourceInOut> Inputs;
