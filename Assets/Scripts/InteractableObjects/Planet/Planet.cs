@@ -7,28 +7,27 @@ public class Planet : HabitableObject, IResourceController, IBuildable
 {
 
     // IBuildable interface implementation
-    public Buildable BuildableFunctions { get; set; }
-    public int MaxSlots { get; set; }
-    public int CurrentSlots { get; set; }
-    public List<EFacility> CompatibleFacilities { get; set; }
+    public Buildable BuildableControl { get; set; }
 
     //IResourceController interface implementation
-    public ResourceController ResourceControlFunctions { get; set; }
-    public List<ResourceInOut> Inputs { get; set; }
-    public List<ResourceInOut> Outputs { get; set; }
+    public ResourceController ResourceControl { get; set; }
 
-    public Planet(ResourceControllerTemplate _resourceControllerTemplate, BuildableTemplate _buildableTemplate)
+    // Planet variables
+    public List<Resource> AvailableResources { get; set; }
+
+    public Planet(AvailableResourcesTemplate _availableResourcesTemplate, BuildableTemplate _buildableTemplate)
     {
         // IBuildable init
-        BuildableFunctions = new Buildable();
-        BuildableFunctions.OwnerInterface = this;
-        CompatibleFacilities = _buildableTemplate.CompatibleFacilities;
+        BuildableControl = new Buildable();
+        BuildableControl.CompatibleFacilities = _buildableTemplate.CompatibleFacilities;
 
         // IResourceController init
-        ResourceControlFunctions = new ResourceController();
-        ResourceControlFunctions.OwnerInterface = this;
-        Inputs = _resourceControllerTemplate.Inputs;
-        Outputs = _resourceControllerTemplate.Outputs;
+        ResourceControl = new ResourceController();
+        ResourceControl.Inputs = new List<ResourceInOut>();
+        ResourceControl.Outputs = new List<ResourceInOut>();
+
+        // Planet init
+        AvailableResources = _availableResourcesTemplate.AvailableResources;
     }
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Temp_PlanetGenerator : MonoBehaviour
 {
     [SerializeField] BuildableTemplate[] buildableTemplates;
-    [SerializeField] ResourceControllerTemplate[] resourceControllerTemplates;
+    [SerializeField] AvailableResourcesTemplate[] availableResourcesTemplates;
 
     Temp_GalaxyManager GalaxyManager;
 
@@ -23,16 +23,17 @@ public class Temp_PlanetGenerator : MonoBehaviour
         int randBuildableIndex = Random.Range(0, buildableMaxRand);
         BuildableTemplate buildableTemplate = buildableTemplates[randBuildableIndex];
 
-        int resourceControllerMaxRand = resourceControllerTemplates.Length;
-        int randResourceControllerIndex = Random.Range(0, resourceControllerMaxRand);
-        ResourceControllerTemplate resourceControllerTemplate = resourceControllerTemplates[randResourceControllerIndex];
+        int resourcesMaxRand = availableResourcesTemplates.Length;
+        int randResourcesIndex = Random.Range(0, resourcesMaxRand);
+        AvailableResourcesTemplate resourcesTemplate = availableResourcesTemplates[randResourcesIndex];
 
-        Planet newPlanet = new Planet(resourceControllerTemplate, buildableTemplate);
+        Planet newPlanet = new Planet(resourcesTemplate, buildableTemplate);
 
         GalaxyManager.Planets.Add(newPlanet);
 
         GameObject planetRender = Instantiate(planetRenderPrefab);
         planetRender.GetComponent<PlanetRender>().PlanetData = newPlanet;
         planetRender.GetComponent<PlanetRender>().UpdateVariables();
+
     }
 }

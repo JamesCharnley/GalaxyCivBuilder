@@ -9,5 +9,7 @@ public enum EFacility
 }
 public class Buildable
 {
-    public IBuildable OwnerInterface;
+    public int MaxSlots { get; set; }
+    public int CurrentSlots { get; set; }
+    public List<EFacility> CompatibleFacilities { get; set; }
 }

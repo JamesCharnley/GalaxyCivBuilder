@@ -8,7 +8,5 @@ public struct HabitatStats
 }
 public abstract class HabitableObject : InteractableObject, IHabitat
 {
-    public Habitat HabitatFunctions { get; set; }
-    public int Population { get; set; }
-    public HabitatStats Stats { get; set; }
+    public Habitat HabitatControl { get; set; }
 }

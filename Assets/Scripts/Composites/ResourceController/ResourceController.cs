@@ -15,10 +15,16 @@ public struct ResourceInOut
     public int CurrentAmount;
     public int MaxAmount;
 }
-
+[System.Serializable]
+public struct Resource
+{
+    public EResource ResourceName;
+    public int Amount;
+}
 public class ResourceController
 {
-    public IResourceController OwnerInterface { get; set; }
+    public List<ResourceInOut> Inputs { get; set; }
+    public List<ResourceInOut> Outputs { get; set; }
 
     public void RegisterController()
     {

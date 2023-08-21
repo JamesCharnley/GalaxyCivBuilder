@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Habitat
 {
-    public IHabitat OwnerInterface;
+    public int Population { get; set; }
+    public HabitatStats Stats { get; set; }
 }

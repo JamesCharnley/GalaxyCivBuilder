@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface IResourceController
 {
-    public ResourceController ResourceControlFunctions { get; set; }
-    public List<ResourceInOut> Inputs { get; set; }
-    public List<ResourceInOut> Outputs { get; set; }
+    public ResourceController ResourceControl { get; set; }
+    
 }
