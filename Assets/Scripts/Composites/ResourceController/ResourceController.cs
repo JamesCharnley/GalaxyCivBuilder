@@ -16,7 +16,7 @@ public struct ResourceInOut
     public int MaxAmount;
 }
 
-public class ResourceController : MonoBehaviour
+public class ResourceController
 {
     public IResourceController OwnerInterface { get; set; }
 

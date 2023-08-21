@@ -7,7 +7,7 @@ public enum EFacility
     SolarFarm,
     FoodFarm
 }
-public class Buildable : MonoBehaviour
+public class Buildable
 {
     public IBuildable OwnerInterface;
 }

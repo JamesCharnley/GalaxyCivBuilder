@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class InteractableObject : MonoBehaviour
+public abstract class InteractableObject
 {
     public DisplayInfo DisplayInformation;
     Guid OwnerId;
