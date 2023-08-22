@@ -7,6 +7,6 @@ using UnityEngine;
 public abstract class InteractableObject
 {
     public DisplayInfo DisplayInformation;
-    Guid OwnerId;
-
+    public Guid OwnerId;
+    public EMenuType MenuType;
 }

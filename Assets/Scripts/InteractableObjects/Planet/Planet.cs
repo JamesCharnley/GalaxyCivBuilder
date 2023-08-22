@@ -15,7 +15,7 @@ public class Planet : HabitableObject, IResourceController, IBuildable
     // Planet variables
     public List<Resource> AvailableResources { get; set; }
 
-    public Planet(AvailableResourcesTemplate _availableResourcesTemplate, BuildableTemplate _buildableTemplate)
+    public Planet(AvailableResourcesTemplate _availableResourcesTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo)
     {
         // IBuildable init
         BuildableControl = new Buildable();
@@ -28,6 +28,8 @@ public class Planet : HabitableObject, IResourceController, IBuildable
 
         // Planet init
         AvailableResources = _availableResourcesTemplate.AvailableResources;
+        MenuType = EMenuType.Planet;
+        DisplayInformation = _displayInfo;
     }
 
 

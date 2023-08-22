@@ -31,7 +31,15 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log(hit.transform.name);
+            IInteractableRender interactable = hit.transform.GetComponent<IInteractableRender>();
+            if(interactable != null ) 
+            {
+                UIManager uiManager = FindObjectOfType<UIManager>();
+                if (uiManager)
+                {
+                    uiManager.OpenObjectMenu(interactable.Interactable);
+                }
+            }
         }
     }
 }

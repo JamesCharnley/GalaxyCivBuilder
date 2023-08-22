@@ -6,6 +6,7 @@ public class Temp_PlanetGenerator : MonoBehaviour
 {
     [SerializeField] BuildableTemplate[] buildableTemplates;
     [SerializeField] AvailableResourcesTemplate[] availableResourcesTemplates;
+    [SerializeField] DisplayInfo[] displayInfos;
 
     Temp_GalaxyManager GalaxyManager;
 
@@ -27,7 +28,11 @@ public class Temp_PlanetGenerator : MonoBehaviour
         int randResourcesIndex = Random.Range(0, resourcesMaxRand);
         AvailableResourcesTemplate resourcesTemplate = availableResourcesTemplates[randResourcesIndex];
 
-        Planet newPlanet = new Planet(resourcesTemplate, buildableTemplate);
+        int dispInfoMaxRand = displayInfos.Length;
+        int randDispInfoIndex = Random.Range(0, dispInfoMaxRand);
+        DisplayInfo dispInfoTemplate = displayInfos[randDispInfoIndex];
+
+        Planet newPlanet = new Planet(resourcesTemplate, buildableTemplate, dispInfoTemplate);
 
         GalaxyManager.Planets.Add(newPlanet);
 
