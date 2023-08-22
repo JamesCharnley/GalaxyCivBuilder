@@ -15,10 +15,7 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject menuParent in  MenuParents)
-        {
-            menuParent.SetActive(false);
-        }
+        DisableChildren();   
     }
 
     // Update is called once per frame
@@ -47,5 +44,17 @@ public class MenuController : MonoBehaviour
         {
             menuParent.SetActive(true);
         }
+    }
+    void DisableChildren()
+    {
+        foreach (GameObject menuParent in MenuParents)
+        {
+            menuParent.SetActive(false);
+        }
+    }
+
+    public void CloseMenu()
+    {
+        DisableChildren();
     }
 }
