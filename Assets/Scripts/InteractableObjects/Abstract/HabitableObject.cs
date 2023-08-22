@@ -9,4 +9,9 @@ public struct HabitatStats
 public abstract class HabitableObject : InteractableObject, IHabitat
 {
     public Habitat HabitatControl { get; set; }
+
+    public HabitableObject()
+    {
+        HabitatControl = new Habitat();
+    }
 }
