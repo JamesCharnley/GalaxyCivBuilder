@@ -2,21 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EResource
+{
+    None,
+    Energy,
+    Food,
+    Metal,
+    RareMetal,
+    Carbon,
+    Silica,
+    Water,
+    Uranium
+}
+
 public class ResourceManager : MonoBehaviour
 {
-    [SerializeField] private EResource[] _resourceEnums;
-    [SerializeField] private string[] _resourceNames;
+    [SerializeField] private ResourceStrings ResourceNames;
 
     public Dictionary<EResource, string> ResourceNameDB = new Dictionary<EResource, string>();
     // Start is called before the first frame update
     void Start()
     {
         int index = 0;
-        foreach(EResource resource in _resourceEnums)
+        foreach(EResource resource in ResourceNames.ResourceEnums)
         {
-            if(_resourceNames.Length > index)
+            if(ResourceNames.ResourceNames.Length > index)
             {
-                ResourceNameDB.Add(resource, _resourceNames[index]);
+                ResourceNameDB.Add(resource, ResourceNames.ResourceNames[index]);
             }
             index++;
         }

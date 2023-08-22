@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5490285872145154757}
   - component: {fileID: 8914424183858690112}
+  - component: {fileID: 8818131002150978569}
   m_Layer: 0
   m_Name: GalaxyManager
   m_TagString: Untagged
@@ -44,3 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e37f9a8f7577a44a320b24d56060e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8818131002150978569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618925262733746910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80caee06e5740f34eb117baeadc710a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceEnums: 00000000
+  _resourceNames: []
