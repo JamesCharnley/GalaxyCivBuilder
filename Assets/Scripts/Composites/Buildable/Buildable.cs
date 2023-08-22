@@ -5,7 +5,15 @@ using UnityEngine;
 public enum EFacility
 {
     SolarFarm,
-    FoodFarm
+    FoodFarm,
+    WindFarm,
+    MetalMine,
+    RareMetalMine,
+    CarbonMine,
+    SilicaMine,
+    UraniumMine,
+    WaterExtractor,
+    NuclearPowerPlant
 }
 public class Buildable
 {
