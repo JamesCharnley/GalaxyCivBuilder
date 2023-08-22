@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
-    private InteractableObject SelectedObject;
+    protected InteractableObject SelectedObject;
 
-    bool IsActive = false;
+    protected bool IsActive = false;
 
-    [SerializeField] GameObject[] MenuParents;
+    [SerializeField] protected GameObject[] MenuParents;
 
     [SerializeField] TMPro.TMP_Text NameText;
     [SerializeField] TMPro.TMP_Text DescriptionText;

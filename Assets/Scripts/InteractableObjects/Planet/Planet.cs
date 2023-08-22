@@ -26,6 +26,9 @@ public class Planet : HabitableObject, IResourceController, IBuildable
         ResourceControl.Inputs = new List<ResourceInOut>();
         ResourceControl.Outputs = new List<ResourceInOut>();
 
+        // IHabitat init
+        HabitatControl = new Habitat();
+
         // Planet init
         AvailableResources = _availableResourcesTemplate.AvailableResources;
         MenuType = EMenuType.Planet;
