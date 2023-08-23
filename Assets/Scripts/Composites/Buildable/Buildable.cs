@@ -20,4 +20,5 @@ public class Buildable
     public int MaxSlots { get; set; }
     public int CurrentSlots { get; set; }
     public List<EFacility> CompatibleFacilities { get; set; }
+    public List<FacilityData> BuildSlots { get; set; }
 }

@@ -6,4 +6,7 @@ using UnityEngine;
 public class BuildableTemplate : ScriptableObject
 {
     public List<EFacility> CompatibleFacilities;
+    public List<FacilityData> BuildSlots;
+    public int MaxSlots;
+    public int CurrentSlots;
 }

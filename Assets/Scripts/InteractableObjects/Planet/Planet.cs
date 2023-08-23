@@ -20,6 +20,31 @@ public class Planet : HabitableObject, IResourceController, IBuildable
         // IBuildable init
         BuildableControl = new Buildable();
         BuildableControl.CompatibleFacilities = _buildableTemplate.CompatibleFacilities;
+        BuildableControl.CurrentSlots = _buildableTemplate.CurrentSlots;
+        BuildableControl.MaxSlots = _buildableTemplate.MaxSlots;
+        BuildableControl.BuildSlots = new List<FacilityData>();
+        ResourceManager resourceManager = GameObject.FindObjectOfType<ResourceManager>();
+        if(resourceManager != null )
+        {
+            foreach (FacilityData fd in _buildableTemplate.BuildSlots)
+            {
+                FacilityData data;
+                if(resourceManager.FacilityInfoDatabase.TryGetValue(fd.Facility, out data))
+                {
+                    BuildableControl.BuildSlots.Add(data);
+                    Debug.Log("Added data to buildslot");
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to get facility from FacilityDB");
+                }
+
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ResourceManager is null");
+        }
 
         // IResourceController init
         ResourceControl = new ResourceController();

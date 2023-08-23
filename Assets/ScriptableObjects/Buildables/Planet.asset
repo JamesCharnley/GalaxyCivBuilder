@@ -13,3 +13,24 @@ MonoBehaviour:
   m_Name: Planet
   m_EditorClassIdentifier: 
   CompatibleFacilities: 0000000001000000
+  BuildSlots:
+  - Facility: 0
+    Name: 
+    Description: 
+    DisplayImage: {fileID: 0}
+    ResourceCost: []
+    InputOutput: []
+  - Facility: 1
+    Name: 
+    Description: 
+    DisplayImage: {fileID: 0}
+    ResourceCost: []
+    InputOutput: []
+  - Facility: 8
+    Name: 
+    Description: 
+    DisplayImage: {fileID: 0}
+    ResourceCost: []
+    InputOutput: []
+  MaxSlots: 6
+  CurrentSlots: 5
