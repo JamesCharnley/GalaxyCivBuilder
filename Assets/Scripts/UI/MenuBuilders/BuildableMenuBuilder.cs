@@ -31,4 +31,12 @@ public class BuildableMenuBuilder : MonoBehaviour
             }
         }
     }
+    public void CLearMenu()
+    {
+        for (int i = BuildablePanel.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(BuildablePanel.transform.GetChild(i).gameObject);
+            BuildSlots.Clear();
+        }
+    }
 }

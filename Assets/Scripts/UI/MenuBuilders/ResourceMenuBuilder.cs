@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ResourceMenuBuilder : MonoBehaviour
@@ -47,10 +48,37 @@ public class ResourceMenuBuilder : MonoBehaviour
                 }
             }
 
+            ResourceManager rm = FindObjectOfType<ResourceManager>();
             foreach(Resource res in resourceTotals)
             {
-                Debug.Log(res.ResourceName + " = " + res.Amount);
+                if (rm)
+                {
+                    string resName;
+                    if (rm.ResourceNameDB.TryGetValue(res.ResourceName, out resName))
+                    {
+                        GameObject statPref = Instantiate(StatsTextPrefab);
+                        statPref.transform.SetParent(ResourceStatsPanel.transform, false);
+                        TMPro.TMP_Text text = statPref.GetComponent<TMPro.TMP_Text>();
+                        if(res.Amount > 0)
+                        {
+                            text.text = resName + ": +" + res.Amount.ToString();
+                        }
+                        else
+                        {
+                            text.text = resName + ": " + res.Amount.ToString();
+                        }
+                    }
+                }
+            
             }
+        }
+    }
+
+    public void CLearMenu()
+    {
+        for(int i = ResourceStatsPanel.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(ResourceStatsPanel.transform.GetChild(i).gameObject);
         }
     }
 }

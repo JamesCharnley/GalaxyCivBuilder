@@ -29,6 +29,6 @@ public class PlanetRender : MonoBehaviour, IInteractableRender
         Inputs = PlanetData.ResourceControl.Inputs;
         Outputs = PlanetData.ResourceControl.Outputs;
         CompatibleFacilities = PlanetData.BuildableControl.CompatibleFacilities;
-        AvailableResources = PlanetData.AvailableResources;
+        AvailableResources = PlanetData.AvailableResourcesControl.Resources;
     }
 }

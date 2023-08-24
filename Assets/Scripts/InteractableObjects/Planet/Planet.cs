@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
 
-public class Planet : HabitableObject, IResourceController, IBuildable
+public class Planet : HabitableObject, IResourceController, IBuildable, IAvailableResources
 {
 
     // IBuildable interface implementation
@@ -13,17 +14,19 @@ public class Planet : HabitableObject, IResourceController, IBuildable
     //IResourceController interface implementation
     public ResourceController ResourceControl { get; set; }
 
-    // Planet variables
-    public List<Resource> AvailableResources { get; set; }
-    public List<RawResource> AvailableRawResources { get; set; }
+    // IAvailableResources interface implementation
+    public AvailableResources AvailableResourcesControl { get; set; }
 
     public Planet(AvailableResourcesTemplate _availableResourcesTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo) : base()
     {
 
         // IResourceController init
-        ResourceControl = new ResourceController();
-        ResourceControl.Inputs = new List<ResourceInOut>();
-        ResourceControl.Outputs = new List<ResourceInOut>();
+        ResourceControl = new ResourceController(new List<ResourceInOut>(), new List<ResourceInOut>(), new List<RawResource>(), this);
+
+        // IAvailableResources init
+        AvailableResourcesControl = new AvailableResources();
+        AvailableResourcesControl.Resources = _availableResourcesTemplate.AvailableResources;
+        AvailableResourcesControl.RawResources = _availableResourcesTemplate.AvailableRawResources;
 
         // IBuildable init
         BuildableControl = new Buildable();
@@ -42,6 +45,7 @@ public class Planet : HabitableObject, IResourceController, IBuildable
                     BuildableControl.BuildSlots.Add(data);
                     ResourceControl.UpdateInputs(data.Inputs.ToList());
                     ResourceControl.UpdateOutputs(data.Outputs.ToList());
+                    ResourceControl.UpdateUsedRawResources(data.RequiredRawResources.ToList());
                     Debug.Log("Added data to buildslot");
                 }
                 else
@@ -57,8 +61,6 @@ public class Planet : HabitableObject, IResourceController, IBuildable
         }
 
         // Planet init
-        AvailableResources = _availableResourcesTemplate.AvailableResources;
-        AvailableRawResources = _availableResourcesTemplate.AvailableRawResources;
         MenuType = EMenuType.Planet;
         DisplayInformation = _displayInfo;
     }

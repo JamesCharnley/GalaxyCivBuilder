@@ -18,4 +18,11 @@ public class HabitableMenuBuilder : MonoBehaviour
             go.transform.SetParent(HabitatStatsGrid.transform);
         }
     }
+    public void CLearMenu()
+    {
+        for (int i = HabitatStatsGrid.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(HabitatStatsGrid.transform.GetChild(i).gameObject);
+        }
+    }
 }

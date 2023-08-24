@@ -29,10 +29,12 @@ public class MenuController : MonoBehaviour
         if (IsActive)
         {
             // clear data
+            ClearMenu(SelectedObject);
         }
         else
         {
             EnableChildren();
+            IsActive = true;
         }
         SelectedObject = interactableObject;
         NameText.text = interactableObject.DisplayInformation.Name;
@@ -55,6 +57,12 @@ public class MenuController : MonoBehaviour
         {
             GetComponent<ResourceMenuBuilder>().InitialiseMenu(interactableObject);
         }
+
+        IAvailableResources availResControl = interactableObject as IAvailableResources;
+        if(availResControl != null)
+        {
+            GetComponent<AvailableResourceMenuBuilder>().InitialiseMenu(interactableObject);
+        }
     }
     void EnableChildren()
     {
@@ -73,6 +81,34 @@ public class MenuController : MonoBehaviour
 
     public void CloseMenu()
     {
+        ClearMenu(SelectedObject);
         DisableChildren();
+        IsActive = false;
+    }
+    void ClearMenu(InteractableObject interactableObject)
+    {
+        IHabitat habitat = interactableObject as IHabitat;
+        if (habitat != null)
+        {
+            GetComponent<HabitableMenuBuilder>().CLearMenu();
+        }
+
+        IBuildable buildable = interactableObject as IBuildable;
+        if (buildable != null)
+        {
+            GetComponent<BuildableMenuBuilder>().CLearMenu();
+        }
+
+        IResourceController resControl = interactableObject as IResourceController;
+        if (resControl != null)
+        {
+            GetComponent<ResourceMenuBuilder>().CLearMenu();
+        }
+
+        IAvailableResources availResControl = interactableObject as IAvailableResources;
+        if (availResControl != null)
+        {
+            GetComponent<AvailableResourceMenuBuilder>().CLearMenu();
+        }
     }
 }

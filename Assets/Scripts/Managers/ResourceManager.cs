@@ -47,6 +47,10 @@ public class ResourceManager : MonoBehaviour
 
     public Dictionary<EResource, string> ResourceNameDB = new Dictionary<EResource, string>();
     public Dictionary<EFacility, FacilityData> FacilityInfoDatabase = new Dictionary<EFacility, FacilityData>();
+
+    Dictionary<EResource, int> TotalResources = new Dictionary<EResource, int>();
+
+    List<IResourceController> ResourceControllers = new List<IResourceController>();
     // Start is called before the first frame update
     void Start()
     {
@@ -57,17 +61,55 @@ public class ResourceManager : MonoBehaviour
             {
                 ResourceNameDB.Add(resource, ResourceNames.ResourceNames[index]);
             }
+
+            TotalResources.Add(resource, 0);
+
             index++;
         }
         foreach(FacilityData data in FacilityDB.Facilities)
         {
             FacilityInfoDatabase.Add(data.Facility, data);
         }
+
+        StartCoroutine(UpdateResourceControllers());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void RegisterResourceController(IResourceController _resourceController)
+    {
+        ResourceControllers.Add(_resourceController);
+    }
+
+    IEnumerator UpdateResourceControllers()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        foreach(IResourceController controller in ResourceControllers)
+        {
+            controller.ResourceControl.UpdateResourceManager(this);
+        }
+
+        foreach(KeyValuePair<EResource, int> ele in TotalResources)
+        {
+            if(ele.Value != 0)
+            {
+                Debug.Log(ele.Key + "; " + ele.Value);
+            }
+        }
+
+        StartCoroutine(UpdateResourceControllers());
+    }
+
+    public void UpdateTotalResources(List<Resource> _changes)
+    {
+        foreach(Resource res in _changes)
+        {
+            TotalResources[res.ResourceName] += res.Amount;
+        }
     }
 }
