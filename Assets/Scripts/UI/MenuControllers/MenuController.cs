@@ -37,6 +37,24 @@ public class MenuController : MonoBehaviour
         SelectedObject = interactableObject;
         NameText.text = interactableObject.DisplayInformation.Name;
         DescriptionText.text = interactableObject.DisplayInformation.Description;
+
+        IHabitat habitat = interactableObject as IHabitat;
+        if (habitat != null)
+        {
+            GetComponent<HabitableMenuBuilder>().InitialiseMenu(interactableObject);
+        }
+
+        IBuildable buildable = interactableObject as IBuildable;
+        if (buildable != null) 
+        {
+            GetComponent<BuildableMenuBuilder>().InitialiseMenu(interactableObject);
+        }
+
+        IResourceController resControl = interactableObject as IResourceController;
+        if(resControl != null)
+        {
+            GetComponent<ResourceMenuBuilder>().InitialiseMenu(interactableObject);
+        }
     }
     void EnableChildren()
     {

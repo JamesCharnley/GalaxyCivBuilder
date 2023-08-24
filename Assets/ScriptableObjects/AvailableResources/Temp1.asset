@@ -17,3 +17,22 @@ MonoBehaviour:
     Amount: 1000
   - ResourceName: 2
     Amount: 1000
+  - ResourceName: 3
+    Amount: 1000
+  - ResourceName: 4
+    Amount: 1000
+  - ResourceName: 5
+    Amount: 1000
+  - ResourceName: 7
+    Amount: 1000
+  AvailableRawResources:
+  - ResourceName: 1
+    Amount: 100
+  - ResourceName: 2
+    Amount: 100
+  - ResourceName: 4
+    Amount: 1000
+  - ResourceName: 3
+    Amount: 1000
+  - ResourceName: 5
+    Amount: 1000

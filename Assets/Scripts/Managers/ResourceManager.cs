@@ -15,6 +15,16 @@ public enum EResource
     Water,
     Uranium
 }
+public enum ERawResource
+{
+    None,
+    Solar,
+    Wind,
+    CO2,
+    Water,
+    Heat,
+    FertileLand
+}
 
 [System.Serializable]
 public struct FacilityData
@@ -24,7 +34,10 @@ public struct FacilityData
     public string Description;
     public Sprite DisplayImage;
     public Resource[] ResourceCost;
-    public ResourceInOut[] InputOutput;
+    public Resource[] Inputs;
+    public Resource[] Outputs;
+    public RawResource[] RequiredRawResources;
+    public RawResource[] RawResourceOutput;
 }
 
 public class ResourceManager : MonoBehaviour

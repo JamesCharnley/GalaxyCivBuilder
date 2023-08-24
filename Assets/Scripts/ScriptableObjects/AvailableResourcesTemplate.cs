@@ -6,4 +6,5 @@ using UnityEngine;
 public class AvailableResourcesTemplate : ScriptableObject
 {
     public List<Resource> AvailableResources;
+    public List<RawResource> AvailableRawResources;
 }

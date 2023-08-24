@@ -17,59 +17,181 @@ MonoBehaviour:
     Name: Solar Farm
     Description: Produces energy using solar panels.
     DisplayImage: {fileID: 21300000, guid: 6eaa2f93654c6d44ba180467c9a555ef, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 3
+      Amount: 10
+    Inputs: []
+    Outputs:
+    - ResourceName: 1
+      Amount: 10
+    RequiredRawResources:
+    - ResourceName: 1
+      Amount: 4
+    RawResourceOutput: []
   - Facility: 2
-    Name: 
-    Description: 
+    Name: Wind Farm
+    Description: Produces energy using Wind Turbines
     DisplayImage: {fileID: 21300000, guid: fa9f87c11d602ec42b4c4b56fb79b70c, type: 3}
     ResourceCost: []
-    InputOutput: []
+    Inputs: []
+    Outputs:
+    - ResourceName: 1
+      Amount: 10
+    RequiredRawResources:
+    - ResourceName: 2
+      Amount: 4
+    RawResourceOutput: []
   - Facility: 1
-    Name: 
-    Description: 
+    Name: Food Farm
+    Description: Produces food
     DisplayImage: {fileID: 21300000, guid: f4e8ca167c357234f88746d6189e6885, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 3
+      Amount: 10
+    Inputs:
+    - ResourceName: 1
+      Amount: 4
+    - ResourceName: 7
+      Amount: 4
+    Outputs:
+    - ResourceName: 2
+      Amount: 10
+    RequiredRawResources:
+    - ResourceName: 6
+      Amount: 4
+    RawResourceOutput:
+    - ResourceName: 3
+      Amount: 4
   - Facility: 3
-    Name: 
-    Description: 
+    Name: Metal Mine
+    Description: Produces metal.
     DisplayImage: {fileID: 21300000, guid: bad556cb432c56b42a6544ccfb7987fe, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 1
+      Amount: 10
+    Inputs:
+    - ResourceName: 1
+      Amount: 4
+    Outputs:
+    - ResourceName: 3
+      Amount: 4
+    RequiredRawResources: []
+    RawResourceOutput:
+    - ResourceName: 3
+      Amount: 4
   - Facility: 4
-    Name: 
-    Description: 
+    Name: Rare Metal Mine
+    Description: Produces rare metal.
     DisplayImage: {fileID: 21300000, guid: 11d8118a12cf7bb4487051b088e0e420, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 3
+      Amount: 20
+    - ResourceName: 1
+      Amount: 10
+    Inputs:
+    - ResourceName: 1
+      Amount: 10
+    Outputs:
+    - ResourceName: 4
+      Amount: 2
+    RequiredRawResources: []
+    RawResourceOutput:
+    - ResourceName: 3
+      Amount: 4
   - Facility: 5
-    Name: 
-    Description: 
+    Name: Carbon Mine
+    Description: Produces Carbon
     DisplayImage: {fileID: 21300000, guid: cfb48c7cb353e73479c96e18723b9439, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 1
+      Amount: 4
+    - ResourceName: 3
+      Amount: 4
+    Inputs:
+    - ResourceName: 1
+      Amount: 10
+    - ResourceName: 7
+      Amount: 4
+    Outputs:
+    - ResourceName: 5
+      Amount: 4
+    RequiredRawResources: []
+    RawResourceOutput:
+    - ResourceName: 3
+      Amount: 4
   - Facility: 6
-    Name: 
-    Description: 
+    Name: Silica Mine
+    Description: Produces Silica
     DisplayImage: {fileID: 21300000, guid: 0ea79730fe52abd409de06881a0c074c, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 1
+      Amount: 5
+    - ResourceName: 3
+      Amount: 10
+    Inputs:
+    - ResourceName: 1
+      Amount: 4
+    Outputs:
+    - ResourceName: 6
+      Amount: 2
+    RequiredRawResources: []
+    RawResourceOutput: []
   - Facility: 7
-    Name: 
-    Description: 
+    Name: Uranium Mine
+    Description: Produces Uranium
     DisplayImage: {fileID: 21300000, guid: 647d957c2f7a93944a25591d26510429, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 1
+      Amount: 4
+    - ResourceName: 3
+      Amount: 4
+    Inputs:
+    - ResourceName: 1
+      Amount: 4
+    Outputs:
+    - ResourceName: 8
+      Amount: 2
+    RequiredRawResources: []
+    RawResourceOutput:
+    - ResourceName: 3
+      Amount: 4
   - Facility: 8
-    Name: 
-    Description: 
+    Name: Water Extractor
+    Description: Produces Water
     DisplayImage: {fileID: 21300000, guid: e29d59fbf711a204d8aca7c045cb6f60, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 1
+      Amount: 4
+    - ResourceName: 3
+      Amount: 4
+    Inputs:
+    - ResourceName: 1
+      Amount: 2
+    Outputs:
+    - ResourceName: 7
+      Amount: 5
+    RequiredRawResources:
+    - ResourceName: 4
+      Amount: 4
+    RawResourceOutput: []
   - Facility: 9
-    Name: 
-    Description: 
+    Name: Nuclear Power Plant
+    Description: Produces energy
     DisplayImage: {fileID: 21300000, guid: 1f3398e17d0716c4ca4ee381e5cb6445, type: 3}
-    ResourceCost: []
-    InputOutput: []
+    ResourceCost:
+    - ResourceName: 1
+      Amount: 5
+    - ResourceName: 3
+      Amount: 10
+    - ResourceName: 4
+      Amount: 4
+    Inputs:
+    - ResourceName: 1
+      Amount: 2
+    - ResourceName: 8
+      Amount: 2
+    Outputs:
+    - ResourceName: 1
+      Amount: 20
+    RequiredRawResources: []
+    RawResourceOutput: []
