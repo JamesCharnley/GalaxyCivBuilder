@@ -29,11 +29,8 @@ public class Planet : HabitableObject, IResourceController, IBuildable, IAvailab
         AvailableResourcesControl.RawResources = _availableResourcesTemplate.AvailableRawResources;
 
         // IBuildable init
-        BuildableControl = new Buildable();
-        BuildableControl.CompatibleFacilities = _buildableTemplate.CompatibleFacilities;
-        BuildableControl.CurrentSlots = _buildableTemplate.CurrentSlots;
-        BuildableControl.MaxSlots = _buildableTemplate.MaxSlots;
-        BuildableControl.BuildSlots = new List<FacilityData>();
+        BuildableControl = new Buildable(_buildableTemplate.MaxSlots, _buildableTemplate.CurrentSlots, _buildableTemplate.CompatibleFacilities, new List<FacilityData>(), this);
+
         ResourceManager resourceManager = GameObject.FindObjectOfType<ResourceManager>();
         if (resourceManager != null)
         {

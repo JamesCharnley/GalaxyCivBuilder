@@ -48,7 +48,7 @@ public class ResourceManager : MonoBehaviour
     public Dictionary<EResource, string> ResourceNameDB = new Dictionary<EResource, string>();
     public Dictionary<EFacility, FacilityData> FacilityInfoDatabase = new Dictionary<EFacility, FacilityData>();
 
-    Dictionary<EResource, int> TotalResources = new Dictionary<EResource, int>();
+    public Dictionary<EResource, int> TotalResources = new Dictionary<EResource, int>();
 
     List<IResourceController> ResourceControllers = new List<IResourceController>();
     // Start is called before the first frame update
@@ -98,7 +98,7 @@ public class ResourceManager : MonoBehaviour
         {
             if(ele.Value != 0)
             {
-                Debug.Log(ele.Key + "; " + ele.Value);
+                //Debug.Log(ele.Key + "; " + ele.Value);
             }
         }
 

@@ -12,25 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10edd3e4591b476419fd91e15730d977, type: 3}
   m_Name: Planet
   m_EditorClassIdentifier: 
-  CompatibleFacilities: 0000000001000000
+  CompatibleFacilities: 000000000100000002000000
   BuildSlots:
   - Facility: 0
     Name: 
     Description: 
     DisplayImage: {fileID: 0}
     ResourceCost: []
-    InputOutput: []
+    Inputs: []
+    Outputs: []
+    RequiredRawResources: []
+    RawResourceOutput: []
   - Facility: 1
     Name: 
     Description: 
     DisplayImage: {fileID: 0}
     ResourceCost: []
-    InputOutput: []
+    Inputs: []
+    Outputs: []
+    RequiredRawResources: []
+    RawResourceOutput: []
   - Facility: 8
     Name: 
     Description: 
     DisplayImage: {fileID: 0}
     ResourceCost: []
-    InputOutput: []
+    Inputs: []
+    Outputs: []
+    RequiredRawResources: []
+    RawResourceOutput: []
   MaxSlots: 6
   CurrentSlots: 5
