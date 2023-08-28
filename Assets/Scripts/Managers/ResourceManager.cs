@@ -6,24 +6,27 @@ using UnityEngine.UI;
 public enum EResource
 {
     None,
-    Energy,
-    Food,
-    Metal,
-    RareMetal,
+    Quartz,
     Carbon,
-    Silica,
+    Iron,
+    Titanium,
+    Uranium,
     Water,
-    Uranium
-}
-public enum ERawResource
-{
-    None,
+    Lithium,
+    FertileLand,
     Solar,
     Wind,
-    CO2,
-    Water,
-    Heat,
-    FertileLand
+    Thermal,
+    Food,
+    Energy,
+    PureSilicon,
+    Steel,
+    EnrichedUranium,
+    Deuterium,
+    Tritium,
+    Polymer,
+    CarbonFibre,
+    DeuteriumTritium
 }
 
 [System.Serializable]
@@ -36,16 +39,15 @@ public struct FacilityData
     public Resource[] ResourceCost;
     public Resource[] Inputs;
     public Resource[] Outputs;
-    public RawResource[] RequiredRawResources;
-    public RawResource[] RawResourceOutput;
+    public Resource[] RequiredBaseResources;
 }
 
 public class ResourceManager : MonoBehaviour
 {
-    [SerializeField] private ResourceStrings ResourceNames;
+    [SerializeField] private ResourceDatabase ResourceDB;
     [SerializeField] private FacilityDataDB FacilityDB; 
 
-    public Dictionary<EResource, string> ResourceNameDB = new Dictionary<EResource, string>();
+    public Dictionary<EResource, Resource> ResourceNameDB = new Dictionary<EResource, Resource>();
     public Dictionary<EFacility, FacilityData> FacilityInfoDatabase = new Dictionary<EFacility, FacilityData>();
 
     public Dictionary<EResource, int> TotalResources = new Dictionary<EResource, int>();
@@ -55,14 +57,9 @@ public class ResourceManager : MonoBehaviour
     void Start()
     {
         int index = 0;
-        foreach(EResource resource in ResourceNames.ResourceEnums)
+        foreach(Resource resource in ResourceDB.Resources)
         {
-            if(ResourceNames.ResourceNames.Length > index)
-            {
-                ResourceNameDB.Add(resource, ResourceNames.ResourceNames[index]);
-            }
-
-            TotalResources.Add(resource, 0);
+            TotalResources.Add(resource.ResourceName, 0);
 
             index++;
         }

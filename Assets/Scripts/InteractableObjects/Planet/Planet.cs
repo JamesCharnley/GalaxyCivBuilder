@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public class Planet : HabitableObject, IResourceController, IBuildable, IAvailableResources
+public class Planet : HabitableObject, IResourceController, IBuildable
 {
 
     // IBuildable interface implementation
@@ -21,12 +21,7 @@ public class Planet : HabitableObject, IResourceController, IBuildable, IAvailab
     {
 
         // IResourceController init
-        ResourceControl = new ResourceController(new List<ResourceInOut>(), new List<ResourceInOut>(), new List<RawResource>(), this);
-
-        // IAvailableResources init
-        AvailableResourcesControl = new AvailableResources();
-        AvailableResourcesControl.Resources = _availableResourcesTemplate.AvailableResources;
-        AvailableResourcesControl.RawResources = _availableResourcesTemplate.AvailableRawResources;
+        ResourceControl = new ResourceController(new List<Resource>(), new List<Resource>(), new List<Resource>(), new List<Resource>(), this);
 
         // IBuildable init
         BuildableControl = new Buildable(_buildableTemplate.MaxSlots, _buildableTemplate.CurrentSlots, _buildableTemplate.CompatibleFacilities, new List<FacilityData>(), this);
@@ -42,7 +37,7 @@ public class Planet : HabitableObject, IResourceController, IBuildable, IAvailab
                     BuildableControl.BuildSlots.Add(data);
                     ResourceControl.UpdateInputs(data.Inputs.ToList());
                     ResourceControl.UpdateOutputs(data.Outputs.ToList());
-                    ResourceControl.UpdateUsedRawResources(data.RequiredRawResources.ToList());
+                    ResourceControl.UpdateOccupiedResources(data.RequiredBaseResources.ToList());
                     Debug.Log("Added data to buildslot");
                 }
                 else

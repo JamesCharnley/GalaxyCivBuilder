@@ -38,7 +38,6 @@ public class Temp_PlanetGenerator : MonoBehaviour
 
         GameObject planetRender = Instantiate(planetRenderPrefab);
         planetRender.GetComponent<PlanetRender>().PlanetData = newPlanet;
-        planetRender.GetComponent<PlanetRender>().UpdateVariables();
 
     }
 }

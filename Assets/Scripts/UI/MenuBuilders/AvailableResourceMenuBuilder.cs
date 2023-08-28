@@ -8,48 +8,26 @@ public class AvailableResourceMenuBuilder : MonoBehaviour
     [SerializeField] private GameObject StatsTextPrefab;
     public void InitialiseMenu(InteractableObject interactableObject)
     {
-        IAvailableResources availableResources = interactableObject as IAvailableResources;
         IResourceController resourceController = interactableObject as IResourceController;
-        if(availableResources != null && resourceController != null)
+        if(resourceController != null)
         {
-            foreach(RawResource rawResource in availableResources.AvailableResourcesControl.RawResources) 
+            foreach(KeyValuePair<EResource, Resource> baseKVP in resourceController.ResourceControl.BaseResources) 
             {
-                string totalRawResourceText = rawResource.Amount.ToString();
-                string usedRawResourceText = "0";
-                foreach(RawResource usedRawResource in resourceController.ResourceControl.UsedRawResources)
+                string totalBaseResourceText = baseKVP.Value.Amount.ToString();
+                string totalOccupiedBaseResourceText = "0";
+                if(resourceController.ResourceControl.OccupiedResources.ContainsKey(baseKVP.Key))
                 {
-                    if(usedRawResource.ResourceName == rawResource.ResourceName)
-                    {
-                        usedRawResourceText = usedRawResource.Amount.ToString();
-                        break;
-                    }
+                    totalOccupiedBaseResourceText = resourceController.ResourceControl.OccupiedResources[baseKVP.Key].Amount.ToString();
+                    break;
                 }
 
                 GameObject go = Instantiate(StatsTextPrefab);
                 TMPro.TMP_Text text = go.GetComponent<TMPro.TMP_Text>();
-                text.text = rawResource.ResourceName.ToString() + ": " + usedRawResourceText + "/" + totalRawResourceText;
+                text.text = baseKVP.Value.Name + ": " + totalOccupiedBaseResourceText + "/" + totalBaseResourceText;
 
                 go.transform.SetParent(AvailableResourcesPanel.transform, false);
             }
-            foreach(Resource res in availableResources.AvailableResourcesControl.Resources)
-            {
-                string totalResourceText = res.Amount.ToString();
-                string usedResourceText = "0";
-                foreach(ResourceInOut usedRes in resourceController.ResourceControl.Outputs)
-                {
-                    if(res.ResourceName == usedRes.Resource)
-                    {
-                        usedResourceText = usedRes.CurrentAmount.ToString();
-                        break;
-                    }
-                }
 
-                GameObject go = Instantiate(StatsTextPrefab);
-                TMPro.TMP_Text text = go.GetComponent<TMPro.TMP_Text>();
-                text.text = res.ResourceName.ToString() + ": " + usedResourceText + "/" + totalResourceText;
-
-                go.transform.SetParent(AvailableResourcesPanel.transform, false);
-            }
         }
     }
 

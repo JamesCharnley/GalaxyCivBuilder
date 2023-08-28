@@ -12,64 +12,21 @@ public class ResourceMenuBuilder : MonoBehaviour
         IResourceController ResController = interactableObject as IResourceController;
         if(ResController != null)
         {
-            List<Resource> resourceTotals = new List<Resource>();
-            foreach(ResourceInOut inp in ResController.ResourceControl.Inputs)
+            List<Resource> inOuts = ResController.ResourceControl.GetFinalInOutValues();
+            foreach(Resource res in inOuts)
             {
-                Debug.Log("Input: " + inp.Resource);
-                Resource res = new Resource();
-                res.ResourceName = inp.Resource;
-                res.Amount = -inp.CurrentAmount;
-                resourceTotals.Add(res);
-            }
-            
-            foreach(ResourceInOut outp in ResController.ResourceControl.Outputs)
-            {
-                Debug.Log("Output: " + outp.Resource);
-                int index = 0;
-                bool exists = false;
-                foreach(Resource existingRes in resourceTotals)
+                GameObject statPref = Instantiate(StatsTextPrefab);
+                statPref.transform.SetParent(ResourceStatsPanel.transform, false);
+                TMPro.TMP_Text text = statPref.GetComponent<TMPro.TMP_Text>();
+                if (res.Amount > 0)
                 {
-                    if(existingRes.ResourceName == outp.Resource)
-                    {
-                        Resource resCopy = existingRes;
-                        resCopy.Amount += outp.CurrentAmount;
-                        resourceTotals[index] = resCopy;
-                        exists = true;
-                        break;
-                    }
-                    index++;
+                    text.text = res.Name + ": +" + res.Amount.ToString();
                 }
-                if(!exists)
+                else
                 {
-                    Resource res = new Resource();
-                    res.ResourceName = outp.Resource;
-                    res.Amount = outp.CurrentAmount;
-                    resourceTotals.Add(res);
+                    text.text = res.Name + ": " + res.Amount.ToString();
                 }
-            }
 
-            ResourceManager rm = FindObjectOfType<ResourceManager>();
-            foreach(Resource res in resourceTotals)
-            {
-                if (rm)
-                {
-                    string resName;
-                    if (rm.ResourceNameDB.TryGetValue(res.ResourceName, out resName))
-                    {
-                        GameObject statPref = Instantiate(StatsTextPrefab);
-                        statPref.transform.SetParent(ResourceStatsPanel.transform, false);
-                        TMPro.TMP_Text text = statPref.GetComponent<TMPro.TMP_Text>();
-                        if(res.Amount > 0)
-                        {
-                            text.text = resName + ": +" + res.Amount.ToString();
-                        }
-                        else
-                        {
-                            text.text = resName + ": " + res.Amount.ToString();
-                        }
-                    }
-                }
-            
             }
         }
     }

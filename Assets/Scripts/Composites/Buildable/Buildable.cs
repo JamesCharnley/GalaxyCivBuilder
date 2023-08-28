@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
+using System.ComponentModel.Design.Serialization;
+
 public enum EFacility
 {
     SolarFarm,
@@ -70,78 +72,42 @@ public class Buildable
         }
 
         IResourceController resController = OwnerInterface as IResourceController;
-        IAvailableResources availResources = OwnerInterface as IAvailableResources;
-
-        if (availResources == null)
-        {
-            Debug.Log("Cannot build Facility: IAvailableResources is null");
-            return false;
-        }
         if (resController == null)
         {
             Debug.Log("Cannot build Facility: IResourceController is null");
             return false;
         }
-        // Check if planet has enough required raw resources available
-        if (_facility.RequiredRawResources.Length > 0)
+        // Check if planet has enough required resources available
+        if (_facility.RequiredBaseResources.Length > 0)
         {
-            foreach (RawResource reqRes in _facility.RequiredRawResources)
+            foreach (Resource reqRes in _facility.RequiredBaseResources)
             {
-                int reqResInUse = 0;
-                foreach (RawResource rawRes in resController.ResourceControl.UsedRawResources)
+                int totalBaseRes = 0;
+                if(resController.ResourceControl.BaseResources.ContainsKey(reqRes.ResourceName))
                 {
-                    if (rawRes.ResourceName == reqRes.ResourceName)
-                    {
-                        reqResInUse = rawRes.Amount;
-                        foreach (RawResource availRes in availResources.AvailableResourcesControl.RawResources)
-                        {
-                            if (availRes.ResourceName == reqRes.ResourceName)
-                            {
-                                if (reqResInUse + reqRes.Amount > availRes.Amount)
-                                {
-                                    Debug.Log("Cannot build Facility: Insufficant raw resources");
-                                    return false;
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        break;
-                    }
+                    totalBaseRes = resController.ResourceControl.BaseResources[reqRes.ResourceName].Amount;
+                }
+                else
+                {
+                    return false;
+                }
+                int totalOccupiedBaseRes = 0;
+                if(resController.ResourceControl.OccupiedResources.ContainsKey(reqRes.ResourceName))
+                {
+                    totalOccupiedBaseRes = resController.ResourceControl.OccupiedResources[reqRes.ResourceName].Amount;
+                }
+                else
+                {
+                    return false;
+                }
+                int availBaseRes = totalBaseRes - totalOccupiedBaseRes;
+                if(reqRes.Amount > availBaseRes)
+                {
+                    return false;
                 }
             }
         }
-        // Check if planet has enough normal resources available 
-        if(_facility.Outputs.Length > 0)
-        {
-            foreach(Resource outRes in _facility.Outputs)
-            {
-                foreach(Resource availRes in availResources.AvailableResourcesControl.Resources)
-                {
-                    if(outRes.ResourceName == availRes.ResourceName)
-                    {
-                        foreach(ResourceInOut output in resController.ResourceControl.Outputs)
-                        {
-                            if(output.Resource == availRes.ResourceName)
-                            {
-                                if(outRes.Amount + output.CurrentAmount > availRes.Amount)
-                                {
-                                    Debug.Log("Cannot build Facility: Insufficant normal resources");
-                                    return false;
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-        }
+
         return true;
     }
     public void BuildFacility(FacilityData _facility)
@@ -151,7 +117,7 @@ public class Buildable
         {
             if(_facility.Outputs.Length > 0) resController.ResourceControl.UpdateOutputs(_facility.Outputs.ToList());
             if(_facility.Inputs.Length > 0) resController.ResourceControl.UpdateInputs(_facility.Inputs.ToList());
-            if(_facility.RequiredRawResources.Length > 0) resController.ResourceControl.UpdateUsedRawResources(_facility.RequiredRawResources.ToList());
+            if(_facility.RequiredBaseResources.Length > 0) resController.ResourceControl.UpdateOccupiedResources(_facility.RequiredBaseResources.ToList());
         }
         ResourceManager resManager = GameObject.FindObjectOfType<ResourceManager>();
         if(resManager != null)

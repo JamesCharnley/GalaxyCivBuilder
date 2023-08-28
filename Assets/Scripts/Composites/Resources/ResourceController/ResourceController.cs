@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 
 [System.Serializable]
@@ -14,27 +15,46 @@ public struct ResourceInOut
 public struct Resource
 {
     public EResource ResourceName;
+    public string Name;
     public int Amount;
 }
-[System.Serializable]
-public struct RawResource
-{
-    public ERawResource ResourceName;
-    public int Amount;
-}
+
+
 public class ResourceController
 {
-    public List<ResourceInOut> Inputs { get; set; }
-    public List<ResourceInOut> Outputs { get; set; }
-    public List<RawResource> UsedRawResources { get; set; }
+    public Dictionary<EResource, Resource> BaseResources = new Dictionary<EResource, Resource>();
+    public Dictionary<EResource, Resource> OccupiedResources = new Dictionary<EResource, Resource>();
+    public Dictionary<EResource, Resource> Inputs = new Dictionary<EResource, Resource>();
+    public Dictionary<EResource, Resource> Outputs = new Dictionary<EResource, Resource>();
+    //public List<ResourceInOut> Inputs { get; set; }
+    //public List<ResourceInOut> Outputs { get; set; }
+    //public List<RawResource> UsedRawResources { get; set; }
 
     IResourceController OwnerInterface { get; set; }
 
-    public ResourceController(List<ResourceInOut> inputs, List<ResourceInOut> outputs, List<RawResource> usedRawResources, IResourceController ownerInterface)
+    public ResourceController(List<Resource> inputs, List<Resource> outputs, List<Resource> occupiedResources, List<Resource> baseResources, IResourceController ownerInterface)
     {
-        Inputs = inputs;
-        Outputs = outputs;
-        UsedRawResources = usedRawResources;
+        //Inputs = inputs;
+        //Outputs = outputs;
+        //UsedRawResources = usedRawResources;
+
+        foreach (Resource input in inputs)
+        {
+            Inputs.Add(input.ResourceName, input);
+        }
+        foreach (Resource output in outputs)
+        {
+            Outputs.Add(output.ResourceName, output);
+        }
+        foreach(Resource baseResource in baseResources)
+        {
+            BaseResources.Add(baseResource.ResourceName, baseResource);
+        }
+        foreach(Resource occupiedResource in occupiedResources)
+        {
+            OccupiedResources.Add(occupiedResource.ResourceName, occupiedResource);
+        }
+
         OwnerInterface = ownerInterface;
 
         RegisterController();
@@ -57,131 +77,83 @@ public class ResourceController
     {
         foreach(Resource res in _inputs)
         {
-            bool inputExists = false;
-            for(int i = 0; i < Inputs.Count; i++)
+            if(Inputs.ContainsKey(res.ResourceName))
             {
-                if(res.ResourceName == Inputs[i].Resource)
-                {
-                    ResourceInOut resCopy = Inputs[i];
-                    resCopy.CurrentAmount += res.Amount;
-                    Inputs[i] = resCopy;
-                    inputExists = true;
-                    break;
-                }
+                Resource resCopy = Inputs[res.ResourceName];
+                resCopy.Amount += res.Amount;
+                Inputs[res.ResourceName] = resCopy;
             }
-            if(inputExists == false)
+            else
             {
-                ResourceInOut newInput = new ResourceInOut();
-                newInput.Resource = res.ResourceName;
-                newInput.CurrentAmount = res.Amount;
-                Inputs.Add(newInput);
+                Inputs.Add(res.ResourceName, res);
             }
-            
         }
     }
     public void UpdateOutputs(List<Resource> _outputs)
     {
         foreach (Resource res in _outputs)
         {
-            bool outputExists = false;
-            for (int i = 0; i < Outputs.Count; i++)
+            if (Inputs.ContainsKey(res.ResourceName))
             {
-                if (res.ResourceName == Outputs[i].Resource)
-                {
-                    ResourceInOut resCopy = Outputs[i];
-                    resCopy.CurrentAmount += res.Amount;
-                    Outputs[i] = resCopy;
-                    outputExists = true;
-                    break;
-                }
+                Resource resCopy = Outputs[res.ResourceName];
+                resCopy.Amount += res.Amount;
+                Outputs[res.ResourceName] = resCopy;
             }
-            if(outputExists == false)
+            else
             {
-                ResourceInOut newOutput = new ResourceInOut();
-                newOutput.Resource = res.ResourceName;
-                newOutput.CurrentAmount = res.Amount;
-                Outputs.Add(newOutput);
+                Outputs.Add(res.ResourceName, res);
             }
         }
     }
-    public void UpdateUsedRawResources(List<RawResource> _usedResources)
+    public void UpdateOccupiedResources(List<Resource> _usedResources)
     {
-        foreach (RawResource res in _usedResources)
+        foreach (Resource res in _usedResources)
         {
-            bool resExists = false;
-            for (int i = 0; i < UsedRawResources.Count; i++)
+            if (OccupiedResources.ContainsKey(res.ResourceName))
             {
-                if (res.ResourceName == UsedRawResources[i].ResourceName)
-                {
-                    RawResource resCopy = UsedRawResources[i];
-                    resCopy.Amount += res.Amount;
-                    UsedRawResources[i] = resCopy;
-                    resExists = true;
-                    break;
-                }
+                Resource resCopy = OccupiedResources[res.ResourceName];
+                resCopy.Amount += res.Amount;
+                OccupiedResources[res.ResourceName] = resCopy;
             }
-            if (resExists == false)
+            else
             {
-                RawResource newRes = new RawResource();
-                newRes.ResourceName = res.ResourceName;
-                newRes.Amount = res.Amount;
-                UsedRawResources.Add(newRes);
+                OccupiedResources.Add(res.ResourceName, res);
             }
         }
     }
 
     public void UpdateResourceManager(ResourceManager _manager)
     {
-        List<Resource> resourceChanges = new List<Resource>();
-        List<EResource> resources = new List<EResource>();
-        foreach(ResourceInOut input in Inputs)
-        {
-            resources.Add(input.Resource);
-        }
-        foreach (ResourceInOut output in Outputs)
-        {
-            bool exists = false;
-            foreach (ResourceInOut input in Inputs)
-            {
-                if(output.Resource == input.Resource)
-                {
-                    exists = true;
-                }
-            }
-            if(!exists)
-            {
-                resources.Add(output.Resource);
-            }
-        }
+        _manager.UpdateTotalResources(GetFinalInOutValues());
+    }
 
-        foreach (EResource resource in resources)
-        {
-            int total = 0;
-            foreach (ResourceInOut output in Outputs)
-            {
-                if (resource == output.Resource)
-                {
-                    total += output.CurrentAmount;
-                    break;
-                }
-            }
-            foreach (ResourceInOut input in Inputs)
-            {
-                if (resource == input.Resource)
-                {
-                    total -= input.CurrentAmount;
-                }
-            }
+    public List<Resource> GetFinalInOutValues()
+    {
+        Dictionary<EResource, Resource> resources = new Dictionary<EResource, Resource>();
+        resources = Outputs;
 
-            if(total != 0)
+        foreach (KeyValuePair<EResource, Resource> kvp in Inputs)
+        {
+            if (resources.ContainsKey(kvp.Key))
             {
-                Resource res = new Resource();
-                res.ResourceName = resource;
-                res.Amount = total;
-                resourceChanges.Add(res);
+                Resource resCopy = resources[kvp.Key];
+                resCopy.Amount -= kvp.Value.Amount;
+                resources[kvp.Key] = resCopy;
+            }
+            else
+            {
+                Resource resCopy = kvp.Value;
+                resCopy.Amount = -kvp.Value.Amount;
+                resources.Add(kvp.Key, resCopy);
             }
         }
 
-        _manager.UpdateTotalResources(resourceChanges);
+        List<Resource> resChanges = new List<Resource>();
+        foreach (KeyValuePair<EResource, Resource> kvp in resources)
+        {
+            resChanges.Add(kvp.Value);
+        }
+
+        return resChanges;
     }
 }
