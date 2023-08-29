@@ -12,4 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96aae9f09b0431f4dbc63453fcdf3daf, type: 3}
   m_Name: ResourceDB
   m_EditorClassIdentifier: 
-  Resources: []
+  Resources:
+  - ResourceName: 1
+    Name: Quartz
+    Amount: 0
+  - ResourceName: 2
+    Name: Carbon
+    Amount: 0
+  - ResourceName: 3
+    Name: Iron
+    Amount: 0
+  - ResourceName: 4
+    Name: Titanium
+    Amount: 0
+  - ResourceName: 5
+    Name: Uranium
+    Amount: 0
+  - ResourceName: 6
+    Name: Water
+    Amount: 0
+  - ResourceName: 7
+    Name: Lithium
+    Amount: 0
+  - ResourceName: 8
+    Name: Fertile Land
+    Amount: 0
+  - ResourceName: 9
+    Name: Solar
+    Amount: 0
+  - ResourceName: 10
+    Name: Wind
+    Amount: 0
+  - ResourceName: 11
+    Name: Thermal
+    Amount: 0
+  - ResourceName: 12
+    Name: Food
+    Amount: 0
+  - ResourceName: 13
+    Name: Energy
+    Amount: 0
+  - ResourceName: 14
+    Name: Pure Silicon
+    Amount: 0
+  - ResourceName: 15
+    Name: Steel
+    Amount: 0
+  - ResourceName: 16
+    Name: Enriched Uranium
+    Amount: 0
+  - ResourceName: 17
+    Name: Deuterium
+    Amount: 0
+  - ResourceName: 18
+    Name: Tritium
+    Amount: 0
+  - ResourceName: 19
+    Name: Polymer
+    Amount: 0
+  - ResourceName: 20
+    Name: Carbon Fibre
+    Amount: 0
+  - ResourceName: 21
+    Name: Deuterium-Tritium
+    Amount: 0

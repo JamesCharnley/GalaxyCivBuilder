@@ -14,25 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AvailableResources:
   - ResourceName: 1
+    Name: 
     Amount: 1000
   - ResourceName: 2
+    Name: 
     Amount: 1000
   - ResourceName: 3
+    Name: 
     Amount: 1000
   - ResourceName: 4
+    Name: 
     Amount: 1000
   - ResourceName: 5
+    Name: 
     Amount: 1000
   - ResourceName: 7
+    Name: 
     Amount: 1000
-  AvailableRawResources:
-  - ResourceName: 1
-    Amount: 100
-  - ResourceName: 2
-    Amount: 100
-  - ResourceName: 4
+  - ResourceName: 9
+    Name: 
     Amount: 1000
-  - ResourceName: 3
+  - ResourceName: 10
+    Name: 
     Amount: 1000
-  - ResourceName: 5
-    Amount: 1000
+  AvailableBaseResources: []
