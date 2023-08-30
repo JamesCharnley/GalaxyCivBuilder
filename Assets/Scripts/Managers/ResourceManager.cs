@@ -47,7 +47,7 @@ public class ResourceManager : MonoBehaviour
     [SerializeField] private ResourceDatabase ResourceDB;
     [SerializeField] private FacilityDataDB FacilityDB; 
 
-    public Dictionary<EResource, Resource> ResourceNameDB = new Dictionary<EResource, Resource>();
+    public Dictionary<EResource, Resource> ResourceDataDB = new Dictionary<EResource, Resource>();
     public Dictionary<EFacility, FacilityData> FacilityInfoDatabase = new Dictionary<EFacility, FacilityData>();
 
     public Dictionary<EResource, int> TotalResources = new Dictionary<EResource, int>();
@@ -56,15 +56,46 @@ public class ResourceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int index = 0;
+        foreach(Resource res in ResourceDB.Resources)
+        {
+            ResourceDataDB.Add(res.ResourceName, res);
+        }
+
         foreach(Resource resource in ResourceDB.Resources)
         {
             TotalResources.Add(resource.ResourceName, 0);
 
-            index++;
         }
+
         foreach(FacilityData data in FacilityDB.Facilities)
         {
+            FacilityData fd = data;
+            int count = 0;
+            foreach(Resource inRes in fd.Inputs)
+            {
+                foreach(Resource resDB in ResourceDB.Resources)
+                {
+                    if(resDB.ResourceName == inRes.ResourceName)
+                    {
+                        fd.Inputs[count].Name = resDB.Name;
+                        break;
+                    }
+                }
+                count++;
+            }
+            count = 0;
+            foreach (Resource outRes in fd.Outputs)
+            {
+                foreach (Resource resDB in ResourceDB.Resources)
+                {
+                    if (resDB.ResourceName == outRes.ResourceName)
+                    {
+                        fd.Outputs[count].Name = resDB.Name;
+                        break;
+                    }
+                }
+                count++;
+            }
             FacilityInfoDatabase.Add(data.Facility, data);
         }
 

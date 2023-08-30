@@ -271,8 +271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildableTemplates:
   - {fileID: 11400000, guid: a9853bf2203058b40baa3e4a1398c329, type: 2}
-  availableResourcesTemplates:
-  - {fileID: 11400000, guid: fe3c2f39efcfc6d49bffbaa9db7e2edf, type: 2}
+  resourceControllerTemplates:
+  - {fileID: 11400000, guid: f3591a1c0bf85f2418d4f3650d254af1, type: 2}
   displayInfos:
   - {fileID: 11400000, guid: 6cb68dbcceff0354db79e5a947fdb76f, type: 2}
   planetRenderPrefab: {fileID: 5056816705104531905, guid: 281a61c3ddbbb49419e9f13815ea8144, type: 3}

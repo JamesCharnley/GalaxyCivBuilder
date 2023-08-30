@@ -15,7 +15,7 @@ MonoBehaviour:
   AvailableResources:
   - ResourceName: 1
     Name: 
-    Amount: 1000
+    Amount: 100
   - ResourceName: 2
     Name: 
     Amount: 1000

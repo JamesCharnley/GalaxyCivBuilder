@@ -12,11 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84f4fe532e63334cacdc278c99fa307, type: 3}
   m_Name: Abundance
   m_EditorClassIdentifier: 
-  Inputs:
-  - Resource: 1
-    CurrentAmount: 56
-    MaxAmount: 0
-  Outputs:
-  - Resource: 1
-    CurrentAmount: 45
-    MaxAmount: 0
+  Inputs: []
+  Outputs: []
+  BaseResources:
+  - ResourceName: 10
+    Name: 
+    Amount: 100
+  - ResourceName: 9
+    Name: 
+    Amount: 100
+  - ResourceName: 6
+    Name: 
+    Amount: 100
+  - ResourceName: 8
+    Name: 
+    Amount: 100

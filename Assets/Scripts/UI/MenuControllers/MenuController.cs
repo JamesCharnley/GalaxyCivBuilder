@@ -56,11 +56,6 @@ public class MenuController : MonoBehaviour
         if(resControl != null)
         {
             GetComponent<ResourceMenuBuilder>().InitialiseMenu(interactableObject);
-        }
-
-        IAvailableResources availResControl = interactableObject as IAvailableResources;
-        if(availResControl != null)
-        {
             GetComponent<AvailableResourceMenuBuilder>().InitialiseMenu(interactableObject);
         }
     }
@@ -103,11 +98,6 @@ public class MenuController : MonoBehaviour
         if (resControl != null)
         {
             GetComponent<ResourceMenuBuilder>().CLearMenu();
-        }
-
-        IAvailableResources availResControl = interactableObject as IAvailableResources;
-        if (availResControl != null)
-        {
             GetComponent<AvailableResourceMenuBuilder>().CLearMenu();
         }
     }

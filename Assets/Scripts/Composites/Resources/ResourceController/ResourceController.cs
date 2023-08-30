@@ -38,6 +38,8 @@ public class ResourceController
         //Outputs = outputs;
         //UsedRawResources = usedRawResources;
 
+        ResourceManager resManager = GameObject.FindObjectOfType<ResourceManager>();
+
         foreach (Resource input in inputs)
         {
             Inputs.Add(input.ResourceName, input);
@@ -48,7 +50,12 @@ public class ResourceController
         }
         foreach(Resource baseResource in baseResources)
         {
-            BaseResources.Add(baseResource.ResourceName, baseResource);
+            Resource resDB = resManager.ResourceDataDB[baseResource.ResourceName];
+            Resource entry = new Resource();
+            entry.ResourceName = baseResource.ResourceName;
+            entry.Name = resDB.Name;
+            entry.Amount = baseResource.Amount;
+            BaseResources.Add(baseResource.ResourceName, entry);
         }
         foreach(Resource occupiedResource in occupiedResources)
         {
@@ -93,7 +100,7 @@ public class ResourceController
     {
         foreach (Resource res in _outputs)
         {
-            if (Inputs.ContainsKey(res.ResourceName))
+            if (Outputs.ContainsKey(res.ResourceName))
             {
                 Resource resCopy = Outputs[res.ResourceName];
                 resCopy.Amount += res.Amount;

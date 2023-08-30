@@ -18,7 +18,6 @@ public class AvailableResourceMenuBuilder : MonoBehaviour
                 if(resourceController.ResourceControl.OccupiedResources.ContainsKey(baseKVP.Key))
                 {
                     totalOccupiedBaseResourceText = resourceController.ResourceControl.OccupiedResources[baseKVP.Key].Amount.ToString();
-                    break;
                 }
 
                 GameObject go = Instantiate(StatsTextPrefab);

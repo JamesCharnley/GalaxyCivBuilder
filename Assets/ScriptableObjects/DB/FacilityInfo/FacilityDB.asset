@@ -19,179 +19,203 @@ MonoBehaviour:
     DisplayImage: {fileID: 21300000, guid: 6eaa2f93654c6d44ba180467c9a555ef, type: 3}
     ResourceCost:
     - ResourceName: 3
+      Name: 
+      Amount: 10
+    - ResourceName: 14
+      Name: 
       Amount: 10
     Inputs: []
     Outputs:
-    - ResourceName: 1
+    - ResourceName: 13
+      Name: Energy
       Amount: 10
-    RequiredRawResources:
-    - ResourceName: 1
-      Amount: 4
-    RawResourceOutput: []
+    RequiredBaseResources:
+    - ResourceName: 9
+      Name: 
+      Amount: 10
   - Facility: 2
     Name: Wind Farm
     Description: Produces energy using Wind Turbines
     DisplayImage: {fileID: 21300000, guid: fa9f87c11d602ec42b4c4b56fb79b70c, type: 3}
-    ResourceCost: []
+    ResourceCost:
+    - ResourceName: 15
+      Name: 
+      Amount: 10
     Inputs: []
     Outputs:
-    - ResourceName: 1
+    - ResourceName: 13
+      Name: Energy
       Amount: 10
-    RequiredRawResources:
-    - ResourceName: 2
-      Amount: 4
-    RawResourceOutput: []
+    RequiredBaseResources:
+    - ResourceName: 10
+      Name: 
+      Amount: 10
   - Facility: 1
     Name: Food Farm
     Description: Produces food
     DisplayImage: {fileID: 21300000, guid: f4e8ca167c357234f88746d6189e6885, type: 3}
     ResourceCost:
     - ResourceName: 3
+      Name: 
       Amount: 10
     Inputs:
-    - ResourceName: 1
+    - ResourceName: 6
+      Name: Quartz
       Amount: 4
-    - ResourceName: 7
+    - ResourceName: 13
+      Name: Lithium
       Amount: 4
     Outputs:
-    - ResourceName: 2
+    - ResourceName: 12
+      Name: Food
       Amount: 10
-    RequiredRawResources:
-    - ResourceName: 6
-      Amount: 4
-    RawResourceOutput:
-    - ResourceName: 3
-      Amount: 4
+    RequiredBaseResources:
+    - ResourceName: 8
+      Name: 
+      Amount: 5
   - Facility: 3
     Name: Metal Mine
     Description: Produces metal.
     DisplayImage: {fileID: 21300000, guid: bad556cb432c56b42a6544ccfb7987fe, type: 3}
     ResourceCost:
     - ResourceName: 1
+      Name: 
       Amount: 10
     Inputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 4
     Outputs:
     - ResourceName: 3
+      Name: Iron
       Amount: 4
-    RequiredRawResources: []
-    RawResourceOutput:
-    - ResourceName: 3
-      Amount: 4
+    RequiredBaseResources: []
   - Facility: 4
     Name: Rare Metal Mine
     Description: Produces rare metal.
     DisplayImage: {fileID: 21300000, guid: 11d8118a12cf7bb4487051b088e0e420, type: 3}
     ResourceCost:
     - ResourceName: 3
+      Name: 
       Amount: 20
     - ResourceName: 1
+      Name: 
       Amount: 10
     Inputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 10
     Outputs:
     - ResourceName: 4
+      Name: Titanium
       Amount: 2
-    RequiredRawResources: []
-    RawResourceOutput:
-    - ResourceName: 3
-      Amount: 4
+    RequiredBaseResources: []
   - Facility: 5
     Name: Carbon Mine
     Description: Produces Carbon
     DisplayImage: {fileID: 21300000, guid: cfb48c7cb353e73479c96e18723b9439, type: 3}
     ResourceCost:
     - ResourceName: 1
+      Name: 
       Amount: 4
     - ResourceName: 3
+      Name: 
       Amount: 4
     Inputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 10
     - ResourceName: 7
+      Name: Lithium
       Amount: 4
     Outputs:
     - ResourceName: 5
+      Name: Uranium
       Amount: 4
-    RequiredRawResources: []
-    RawResourceOutput:
-    - ResourceName: 3
-      Amount: 4
+    RequiredBaseResources: []
   - Facility: 6
     Name: Silica Mine
     Description: Produces Silica
     DisplayImage: {fileID: 21300000, guid: 0ea79730fe52abd409de06881a0c074c, type: 3}
     ResourceCost:
     - ResourceName: 1
+      Name: 
       Amount: 5
     - ResourceName: 3
+      Name: 
       Amount: 10
     Inputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 4
     Outputs:
     - ResourceName: 6
+      Name: Water
       Amount: 2
-    RequiredRawResources: []
-    RawResourceOutput: []
+    RequiredBaseResources: []
   - Facility: 7
     Name: Uranium Mine
     Description: Produces Uranium
     DisplayImage: {fileID: 21300000, guid: 647d957c2f7a93944a25591d26510429, type: 3}
     ResourceCost:
     - ResourceName: 1
+      Name: 
       Amount: 4
     - ResourceName: 3
+      Name: 
       Amount: 4
     Inputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 4
     Outputs:
     - ResourceName: 8
+      Name: Fertile Land
       Amount: 2
-    RequiredRawResources: []
-    RawResourceOutput:
-    - ResourceName: 3
-      Amount: 4
+    RequiredBaseResources: []
   - Facility: 8
     Name: Water Extractor
     Description: Produces Water
     DisplayImage: {fileID: 21300000, guid: e29d59fbf711a204d8aca7c045cb6f60, type: 3}
     ResourceCost:
     - ResourceName: 1
+      Name: 
       Amount: 4
     - ResourceName: 3
+      Name: 
       Amount: 4
     Inputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 2
     Outputs:
     - ResourceName: 7
+      Name: Lithium
       Amount: 5
-    RequiredRawResources:
-    - ResourceName: 4
-      Amount: 4
-    RawResourceOutput: []
+    RequiredBaseResources: []
   - Facility: 9
     Name: Nuclear Power Plant
     Description: Produces energy
     DisplayImage: {fileID: 21300000, guid: 1f3398e17d0716c4ca4ee381e5cb6445, type: 3}
     ResourceCost:
     - ResourceName: 1
+      Name: 
       Amount: 5
     - ResourceName: 3
+      Name: 
       Amount: 10
     - ResourceName: 4
+      Name: 
       Amount: 4
     Inputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 2
     - ResourceName: 8
+      Name: Fertile Land
       Amount: 2
     Outputs:
     - ResourceName: 1
+      Name: Quartz
       Amount: 20
-    RequiredRawResources: []
-    RawResourceOutput: []
+    RequiredBaseResources: []

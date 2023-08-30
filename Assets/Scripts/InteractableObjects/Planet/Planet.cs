@@ -14,14 +14,11 @@ public class Planet : HabitableObject, IResourceController, IBuildable
     //IResourceController interface implementation
     public ResourceController ResourceControl { get; set; }
 
-    // IAvailableResources interface implementation
-    public AvailableResources AvailableResourcesControl { get; set; }
-
-    public Planet(AvailableResourcesTemplate _availableResourcesTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo) : base()
+    public Planet(ResourceControllerTemplate _resourceControllerTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo) : base()
     {
 
         // IResourceController init
-        ResourceControl = new ResourceController(new List<Resource>(), new List<Resource>(), new List<Resource>(), new List<Resource>(), this);
+        ResourceControl = new ResourceController(new List<Resource>(), new List<Resource>(), new List<Resource>(), _resourceControllerTemplate.BaseResources, this);
 
         // IBuildable init
         BuildableControl = new Buildable(_buildableTemplate.MaxSlots, _buildableTemplate.CurrentSlots, _buildableTemplate.CompatibleFacilities, new List<FacilityData>(), this);
