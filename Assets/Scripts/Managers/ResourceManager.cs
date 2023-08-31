@@ -56,41 +56,55 @@ public class ResourceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // fill dictionary with ResourceDatabase
         foreach(Resource res in ResourceDB.Resources)
         {
             ResourceDataDB.Add(res.ResourceName, res);
         }
-
+        // Add all resources to totals with a value of zero
         foreach(Resource resource in ResourceDB.Resources)
         {
             TotalResources.Add(resource.ResourceName, 0);
 
         }
 
+        // Add resource names to all inputs and outputs and required resources of facilities
         foreach(FacilityData data in FacilityDB.Facilities)
         {
-            FacilityData fd = data;
             int count = 0;
-            foreach(Resource inRes in fd.Inputs)
+            foreach(Resource inRes in data.Inputs)
             {
                 foreach(Resource resDB in ResourceDB.Resources)
                 {
                     if(resDB.ResourceName == inRes.ResourceName)
                     {
-                        fd.Inputs[count].Name = resDB.Name;
+                        data.Inputs[count].Name = resDB.Name;
                         break;
                     }
                 }
                 count++;
             }
             count = 0;
-            foreach (Resource outRes in fd.Outputs)
+            foreach (Resource outRes in data.Outputs)
             {
                 foreach (Resource resDB in ResourceDB.Resources)
                 {
                     if (resDB.ResourceName == outRes.ResourceName)
                     {
-                        fd.Outputs[count].Name = resDB.Name;
+                        data.Outputs[count].Name = resDB.Name;
+                        break;
+                    }
+                }
+                count++;
+            }
+            count = 0;
+            foreach (Resource reqRes in data.RequiredBaseResources)
+            {
+                foreach (Resource resDB in ResourceDB.Resources)
+                {
+                    if (resDB.ResourceName == reqRes.ResourceName)
+                    {
+                        data.RequiredBaseResources[count].Name = resDB.Name;
                         break;
                     }
                 }
@@ -120,14 +134,6 @@ public class ResourceManager : MonoBehaviour
         foreach(IResourceController controller in ResourceControllers)
         {
             controller.ResourceControl.UpdateResourceManager(this);
-        }
-
-        foreach(KeyValuePair<EResource, int> ele in TotalResources)
-        {
-            if(ele.Value != 0)
-            {
-                //Debug.Log(ele.Key + "; " + ele.Value);
-            }
         }
 
         StartCoroutine(UpdateResourceControllers());
