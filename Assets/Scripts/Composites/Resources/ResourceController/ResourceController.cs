@@ -26,6 +26,9 @@ public class ResourceController
     public Dictionary<EResource, Resource> OccupiedResources = new Dictionary<EResource, Resource>();
     public Dictionary<EResource, Resource> Inputs = new Dictionary<EResource, Resource>();
     public Dictionary<EResource, Resource> Outputs = new Dictionary<EResource, Resource>();
+    public Dictionary<EResource, Resource> ExcessOutputs = new Dictionary<EResource, Resource>();
+    public int ExcessOutputCapacity = 100;
+    int totalExcessStored = 0;
     //public List<ResourceInOut> Inputs { get; set; }
     //public List<ResourceInOut> Outputs { get; set; }
     //public List<RawResource> UsedRawResources { get; set; }
@@ -129,9 +132,65 @@ public class ResourceController
         }
     }
 
+    public void UpdateExcessResources(List<Resource> _excessResources)
+    {
+
+        if(totalExcessStored < ExcessOutputCapacity)
+        {
+            foreach (Resource resource in _excessResources)
+            {
+                if (resource.Amount > 0)
+                {
+                    if (ExcessOutputs.ContainsKey(resource.ResourceName))
+                    {
+                        int adjustedValue = resource.Amount + ExcessOutputs[resource.ResourceName].Amount;
+                        Resource resCopy = ExcessOutputs[resource.ResourceName];
+                        resCopy.Amount = adjustedValue;
+                        ExcessOutputs[resource.ResourceName] = resCopy;
+                    }
+                    else
+                    {
+                        ExcessOutputs.Add(resource.ResourceName, resource);
+                    }
+                }
+            }
+        }
+
+        foreach (Resource resource in _excessResources)
+        {
+            if (resource.Amount < 0)
+            {
+                if (ExcessOutputs.ContainsKey(resource.ResourceName))
+                {
+                    int adjustedValue = resource.Amount + ExcessOutputs[resource.ResourceName].Amount;
+                    if(adjustedValue > 0)
+                    {
+                        Resource resCopy = ExcessOutputs[resource.ResourceName];
+                        resCopy.Amount = adjustedValue;
+                        ExcessOutputs[resource.ResourceName] = resCopy;
+                    }
+                    else
+                    {
+                        ExcessOutputs.Remove(resource.ResourceName);
+                    }
+                }
+            }
+        }
+
+        totalExcessStored = 0;
+        foreach (KeyValuePair<EResource, Resource> kvp in ExcessOutputs)
+        {
+            totalExcessStored += kvp.Value.Amount;
+        }
+
+
+    }
+
     public void UpdateResourceManager(ResourceManager _manager)
     {
-        _manager.UpdateTotalResources(GetFinalInOutValues());
+        List<Resource> finalInOuts = GetFinalInOutValues();
+        _manager.UpdateTotalResources(finalInOuts);
+        UpdateExcessResources(finalInOuts);
     }
 
     public List<Resource> GetFinalInOutValues()
