@@ -144,9 +144,16 @@ public class ResourceController
                     if (ExcessOutputs.ContainsKey(resource.ResourceName))
                     {
                         int adjustedValue = resource.Amount + ExcessOutputs[resource.ResourceName].Amount;
-                        Resource resCopy = ExcessOutputs[resource.ResourceName];
-                        resCopy.Amount = adjustedValue;
-                        ExcessOutputs[resource.ResourceName] = resCopy;
+                        if(adjustedValue != 0)
+                        {
+                            Resource resCopy = ExcessOutputs[resource.ResourceName];
+                            resCopy.Amount = adjustedValue;
+                            ExcessOutputs[resource.ResourceName] = resCopy;
+                        }
+                        else
+                        {
+                            ExcessOutputs.Remove(resource.ResourceName);
+                        }
                     }
                     else
                     {
@@ -163,7 +170,7 @@ public class ResourceController
                 if (ExcessOutputs.ContainsKey(resource.ResourceName))
                 {
                     int adjustedValue = resource.Amount + ExcessOutputs[resource.ResourceName].Amount;
-                    if(adjustedValue > 0)
+                    if(adjustedValue != 0)
                     {
                         Resource resCopy = ExcessOutputs[resource.ResourceName];
                         resCopy.Amount = adjustedValue;
@@ -174,16 +181,21 @@ public class ResourceController
                         ExcessOutputs.Remove(resource.ResourceName);
                     }
                 }
+                else
+                {
+                    ExcessOutputs.Add(resource.ResourceName, resource);
+                }
             }
         }
 
         totalExcessStored = 0;
         foreach (KeyValuePair<EResource, Resource> kvp in ExcessOutputs)
         {
-            totalExcessStored += kvp.Value.Amount;
+            if(kvp.Value.Amount > 0)
+            {
+                totalExcessStored += kvp.Value.Amount;
+            }
         }
-
-
     }
 
     public void UpdateResourceManager(ResourceManager _manager)
