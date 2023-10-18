@@ -40,6 +40,7 @@ public struct FacilityData
     public Resource[] Inputs;
     public Resource[] Outputs;
     public Resource[] RequiredBaseResources;
+    public GameObject ExtensionPrefab;
 }
 
 public class ResourceManager : MonoBehaviour
