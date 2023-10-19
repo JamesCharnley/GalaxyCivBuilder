@@ -33,6 +33,7 @@ MonoBehaviour:
     - ResourceName: 9
       Name: 
       Amount: 10
+    ExtensionPrefab: {fileID: 0}
   - Facility: 2
     Name: Wind Farm
     Description: Produces energy using Wind Turbines
@@ -50,6 +51,7 @@ MonoBehaviour:
     - ResourceName: 10
       Name: 
       Amount: 10
+    ExtensionPrefab: {fileID: 0}
   - Facility: 1
     Name: Food Farm
     Description: Produces food
@@ -73,6 +75,7 @@ MonoBehaviour:
     - ResourceName: 8
       Name: 
       Amount: 5
+    ExtensionPrefab: {fileID: 0}
   - Facility: 3
     Name: Metal Mine
     Description: Produces metal.
@@ -90,6 +93,7 @@ MonoBehaviour:
       Name: Iron
       Amount: 4
     RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 0}
   - Facility: 4
     Name: Rare Metal Mine
     Description: Produces rare metal.
@@ -110,6 +114,7 @@ MonoBehaviour:
       Name: Titanium
       Amount: 2
     RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 0}
   - Facility: 5
     Name: Carbon Mine
     Description: Produces Carbon
@@ -133,6 +138,7 @@ MonoBehaviour:
       Name: Uranium
       Amount: 4
     RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 0}
   - Facility: 6
     Name: Silica Mine
     Description: Produces Silica
@@ -153,6 +159,7 @@ MonoBehaviour:
       Name: Water
       Amount: 2
     RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 0}
   - Facility: 7
     Name: Uranium Mine
     Description: Produces Uranium
@@ -173,6 +180,7 @@ MonoBehaviour:
       Name: Fertile Land
       Amount: 2
     RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 0}
   - Facility: 8
     Name: Water Extractor
     Description: Produces Water
@@ -193,6 +201,7 @@ MonoBehaviour:
       Name: Lithium
       Amount: 5
     RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 0}
   - Facility: 9
     Name: Nuclear Power Plant
     Description: Produces energy
@@ -219,3 +228,26 @@ MonoBehaviour:
       Name: Quartz
       Amount: 20
     RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 0}
+  - Facility: 10
+    Name: Domestic Cargo Hub
+    Description: Dispatches cargo ships that can transport resources within the star
+      system.
+    DisplayImage: {fileID: 21300000, guid: 1f3398e17d0716c4ca4ee381e5cb6445, type: 3}
+    ResourceCost:
+    - ResourceName: 1
+      Name: 
+      Amount: 5
+    - ResourceName: 3
+      Name: 
+      Amount: 10
+    - ResourceName: 4
+      Name: 
+      Amount: 4
+    Inputs:
+    - ResourceName: 13
+      Name: Quartz
+      Amount: 2
+    Outputs: []
+    RequiredBaseResources: []
+    ExtensionPrefab: {fileID: 2820378339652097305, guid: 3b7bc9707087aee4387d0a172691b340, type: 3}

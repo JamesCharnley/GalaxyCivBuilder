@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public class Planet : HabitableObject, IResourceController, IBuildable
+public class Planet : HabitableObject, IResourceController, IBuildable, ITransportController
 {
 
     // IBuildable interface implementation
@@ -13,6 +13,7 @@ public class Planet : HabitableObject, IResourceController, IBuildable
 
     //IResourceController interface implementation
     public ResourceController ResourceControl { get; set; }
+    public TransportController TransportControl { get; set; }
 
     public Planet(ResourceControllerTemplate _resourceControllerTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo) : base()
     {
@@ -22,6 +23,9 @@ public class Planet : HabitableObject, IResourceController, IBuildable
 
         // IBuildable init
         BuildableControl = new Buildable(_buildableTemplate.MaxSlots, _buildableTemplate.CurrentSlots, _buildableTemplate.CompatibleFacilities, new List<FacilityData>(), this);
+
+        // ITransportController init
+        TransportControl = new();
 
         ResourceManager resourceManager = GameObject.FindObjectOfType<ResourceManager>();
         if (resourceManager != null)

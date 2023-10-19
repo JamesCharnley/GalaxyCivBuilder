@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IExtension
 {
-    public void Setup(GameObject _owner);
-    public void Destroy(GameObject _owner);
+    public void Setup(IBuildable _owner);
+    public void Destroy(IBuildable _owner);
 }

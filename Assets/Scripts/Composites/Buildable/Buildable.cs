@@ -16,7 +16,8 @@ public enum EFacility
     SilicaMine,
     UraniumMine,
     WaterExtractor,
-    NuclearPowerPlant
+    NuclearPowerPlant,
+    DomesticCargoHub
 }
 public class Buildable
 {
@@ -112,6 +113,7 @@ public class Buildable
     }
     public void BuildFacility(FacilityData _facility)
     {
+        // TODO this needs to be changed to work with new system that will queue building of facility until all required resources are consumed
         IResourceController resController = OwnerInterface as IResourceController;
         if(resController != null)
         {
@@ -119,6 +121,8 @@ public class Buildable
             if(_facility.Inputs.Length > 0) resController.ResourceControl.UpdateInputs(_facility.Inputs.ToList());
             if(_facility.RequiredBaseResources.Length > 0) resController.ResourceControl.UpdateOccupiedResources(_facility.RequiredBaseResources.ToList());
         }
+
+        // TODO This needs to be changed to work with new system that will use resources local to planet or import resources to build facility.
         ResourceManager resManager = GameObject.FindObjectOfType<ResourceManager>();
         if(resManager != null)
         {
@@ -130,6 +134,15 @@ public class Buildable
                 costs.Add(resCost);
             }
             resManager.UpdateTotalResources(costs);
+        }
+        if(_facility.ExtensionPrefab != null)
+        {
+            GameObject go = GameObject.Instantiate(_facility.ExtensionPrefab);
+            IExtension ext = go.GetComponent<IExtension>();
+            if(ext != null)
+            {
+                ext.Setup(OwnerInterface);
+            }
         }
         BuildSlots.Add(_facility);
     }
