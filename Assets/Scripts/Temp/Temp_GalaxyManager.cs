@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Temp_GalaxyManager : MonoBehaviour
 {
-    public List<Planet> Planets = new List<Planet>();
+    public List<Planet> Planets = new();
+    public List<StarSystem> StarSystems = new();
 }

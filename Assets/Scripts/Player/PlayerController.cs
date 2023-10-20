@@ -34,11 +34,7 @@ public class PlayerController : MonoBehaviour
             IInteractableRender interactable = hit.transform.GetComponent<IInteractableRender>();
             if(interactable != null ) 
             {
-                UIManager uiManager = FindObjectOfType<UIManager>();
-                if (uiManager)
-                {
-                    uiManager.OpenObjectMenu(interactable.Interactable);
-                }
+                interactable.InteractAction();
             }
         }
     }

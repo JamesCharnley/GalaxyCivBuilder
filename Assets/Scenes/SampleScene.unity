@@ -250,6 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238588832}
   - component: {fileID: 238588831}
+  - component: {fileID: 238588833}
   m_Layer: 0
   m_Name: PlanetGenerator
   m_TagString: Untagged
@@ -291,6 +292,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &238588833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238588830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a4a58d6e036064bb8229d1e8691046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StarSystemRenderPrefab: {fileID: 4508220086508697139, guid: f038eb9cf32d41b4dbdf1352e834c4f3, type: 3}
+  interactableTemplates:
+  - {fileID: 11400000, guid: 8bbecccc8d3808c48934aaba7877d398, type: 2}
 --- !u!1 &268243433
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +831,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 17.61
+  orthographic size: 25.54
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1512,6 +1528,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371029712}
   m_CullTransparentMesh: 1
+--- !u!1 &1550790322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1550790323}
+  - component: {fileID: 1550790324}
+  m_Layer: 0
+  m_Name: StarSystemContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1550790323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550790322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1550790324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550790322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a3c6b2ab82a2d4cbede620db83526f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1646163518
 GameObject:
   m_ObjectHideFlags: 0

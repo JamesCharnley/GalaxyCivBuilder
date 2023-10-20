@@ -14,12 +14,13 @@ public class Temp_PlanetGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GalaxyManager = FindObjectOfType<Temp_GalaxyManager>();
-        GeneratePlanet();
+        
     }
 
-    void GeneratePlanet()
+    public Planet GeneratePlanet(InteractableTemplate _interactableTemplate)
     {
+        GalaxyManager = FindObjectOfType<Temp_GalaxyManager>();
+
         int buildableMaxRand = buildableTemplates.Length;
         int randBuildableIndex = Random.Range(0, buildableMaxRand);
         BuildableTemplate buildableTemplate = buildableTemplates[randBuildableIndex];
@@ -32,12 +33,9 @@ public class Temp_PlanetGenerator : MonoBehaviour
         int randDispInfoIndex = Random.Range(0, dispInfoMaxRand);
         DisplayInfo dispInfoTemplate = displayInfos[randDispInfoIndex];
 
-        Planet newPlanet = new Planet(resourcesTemplate, buildableTemplate, dispInfoTemplate);
+        Planet newPlanet = new Planet(resourcesTemplate, buildableTemplate, dispInfoTemplate, _interactableTemplate.RenderInfo);
 
-        GalaxyManager.Planets.Add(newPlanet);
-
-        GameObject planetRender = Instantiate(planetRenderPrefab);
-        planetRender.GetComponent<PlanetRender>().PlanetData = newPlanet;
+        return newPlanet;
 
     }
 }

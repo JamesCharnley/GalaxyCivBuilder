@@ -55,7 +55,7 @@ public class ResourceManager : MonoBehaviour
 
     List<IResourceController> ResourceControllers = new List<IResourceController>();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // fill dictionary with ResourceDatabase
         foreach(Resource res in ResourceDB.Resources)

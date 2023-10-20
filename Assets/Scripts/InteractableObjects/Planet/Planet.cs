@@ -15,7 +15,7 @@ public class Planet : HabitableObject, IResourceController, IBuildable, ITranspo
     public ResourceController ResourceControl { get; set; }
     public TransportController TransportControl { get; set; }
 
-    public Planet(ResourceControllerTemplate _resourceControllerTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo) : base()
+    public Planet(ResourceControllerTemplate _resourceControllerTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo, FRenderInfo _renderInfo) : base()
     {
 
         // IResourceController init
@@ -56,6 +56,7 @@ public class Planet : HabitableObject, IResourceController, IBuildable, ITranspo
         // Planet init
         MenuType = EMenuType.Planet;
         DisplayInformation = _displayInfo;
+        RenderInfo = _renderInfo;
     }
 
 
