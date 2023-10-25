@@ -44,7 +44,7 @@ public class Temp_StarSystemGenerator : MonoBehaviour
     void SpawnStarSystem()
     {
         GameObject go = Instantiate(StarSystemRenderPrefab);
-        go.transform.position = new Vector3(-40, 0, 0);
+        go.transform.position = new Vector3(-200, 0, 0);
         StarSystemRender sr = go.GetComponent<StarSystemRender>();
         if(sr != null)
         {

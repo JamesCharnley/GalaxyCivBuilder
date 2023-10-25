@@ -1,10 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+public struct FCameraTransform
+{
+    public Vector3 Position;
+    public float Size;
+}
 
 public class StarSystemSpawner : MonoBehaviour
 {
     StarSystem currentStarSystem = null;
+
+    [SerializeField] Button ExitStarSyatemButton;
+    [SerializeField] Camera Cam;
+    FCameraTransform CamData;
+    bool InStarSystem = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,16 +31,39 @@ public class StarSystemSpawner : MonoBehaviour
 
     public void ActivateStarSystemView(StarSystem _starSystem)
     {
+        if(!InStarSystem)
+        {
+            CamData.Position = Cam.transform.position;
+            CamData.Size = Cam.orthographicSize;
+        }
+
         if(currentStarSystem != null)
         {
             ClearStarSystemContainer();
         }
 
+        // activate exit starsystem button
+        ExitStarSyatemButton.enabled = true;
+
         currentStarSystem = _starSystem;
 
         SpawnStarSystem();
+
+        // move camera to starsystem view
+        Cam.transform.position = new Vector3(0,0,-10);
+        Cam.orthographicSize = 70;
+
+        InStarSystem = true;
     }
 
+    public void ActivateGalaxyView()
+    {
+        // move camera to saved data
+        Cam.transform.position = CamData.Position;
+        Cam.orthographicSize = CamData.Size;
+
+        InStarSystem = false;
+    }
     void SpawnStarSystem()
     {
         foreach(InteractableObject obj in currentStarSystem.Contents)
@@ -44,7 +79,12 @@ public class StarSystemSpawner : MonoBehaviour
 
     void ClearStarSystemContainer()
     {
+        for(int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
 
+        currentStarSystem = null;
     }
 
     void BuildPlanet(Planet _planet)
@@ -75,6 +115,15 @@ public class StarSystemSpawner : MonoBehaviour
         }
         
 
+    }
+
+    public void ExitStarSystem()
+    {
+        ExitStarSyatemButton.enabled = false;
+
+        ClearStarSystemContainer();
+
+        ActivateGalaxyView();
     }
     
 }
