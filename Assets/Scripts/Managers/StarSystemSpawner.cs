@@ -13,7 +13,7 @@ public class StarSystemSpawner : MonoBehaviour
 {
     StarSystem currentStarSystem = null;
 
-    [SerializeField] Button ExitStarSyatemButton;
+    [SerializeField] Button ExitStarSystemButton;
     [SerializeField] Camera Cam;
     FCameraTransform CamData;
     bool InStarSystem = false;
@@ -43,7 +43,7 @@ public class StarSystemSpawner : MonoBehaviour
         }
 
         // activate exit starsystem button
-        ExitStarSyatemButton.enabled = true;
+        ExitStarSystemButton.transform.gameObject.SetActive(true);
 
         currentStarSystem = _starSystem;
 
@@ -119,7 +119,7 @@ public class StarSystemSpawner : MonoBehaviour
 
     public void ExitStarSystem()
     {
-        ExitStarSyatemButton.enabled = false;
+        ExitStarSystemButton.transform.gameObject.SetActive(false);
 
         ClearStarSystemContainer();
 
