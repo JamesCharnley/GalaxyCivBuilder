@@ -113,8 +113,6 @@ public class ResourceManager : MonoBehaviour
             }
             FacilityInfoDatabase.Add(data.Facility, data);
         }
-
-        StartCoroutine(UpdateResourceControllers());
     }
 
     // Update is called once per frame
@@ -128,16 +126,17 @@ public class ResourceManager : MonoBehaviour
         ResourceControllers.Add(_resourceController);
     }
 
-    IEnumerator UpdateResourceControllers()
+    public void UpdateResourceControllers()
     {
-        yield return new WaitForSeconds(1.0f);
-
         foreach(IResourceController controller in ResourceControllers)
         {
             controller.ResourceControl.UpdateResourceManager(this);
         }
+    }
 
-        StartCoroutine(UpdateResourceControllers());
+    public void UpdateResourceShipping()
+    {
+        
     }
 
     public void UpdateTotalResources(List<Resource> _changes)
