@@ -31,7 +31,7 @@ MonoBehaviour:
       Amount: 10
     RequiredBaseResources:
     - ResourceName: 9
-      Name: 
+      Name: Solar
       Amount: 10
     ExtensionPrefab: {fileID: 0}
   - Facility: 2
@@ -49,7 +49,7 @@ MonoBehaviour:
       Amount: 10
     RequiredBaseResources:
     - ResourceName: 10
-      Name: 
+      Name: Wind
       Amount: 10
     ExtensionPrefab: {fileID: 0}
   - Facility: 1
@@ -62,10 +62,10 @@ MonoBehaviour:
       Amount: 10
     Inputs:
     - ResourceName: 6
-      Name: Quartz
+      Name: Water
       Amount: 4
     - ResourceName: 13
-      Name: Lithium
+      Name: Energy
       Amount: 4
     Outputs:
     - ResourceName: 12
@@ -73,7 +73,7 @@ MonoBehaviour:
       Amount: 10
     RequiredBaseResources:
     - ResourceName: 8
-      Name: 
+      Name: Fertile Land
       Amount: 5
     ExtensionPrefab: {fileID: 0}
   - Facility: 3
@@ -193,13 +193,13 @@ MonoBehaviour:
       Name: 
       Amount: 4
     Inputs:
-    - ResourceName: 1
-      Name: Quartz
+    - ResourceName: 13
+      Name: Energy
       Amount: 2
     Outputs:
-    - ResourceName: 7
-      Name: Lithium
-      Amount: 5
+    - ResourceName: 6
+      Name: Water
+      Amount: 20
     RequiredBaseResources: []
     ExtensionPrefab: {fileID: 0}
   - Facility: 9
@@ -246,7 +246,7 @@ MonoBehaviour:
       Amount: 4
     Inputs:
     - ResourceName: 13
-      Name: Quartz
+      Name: Energy
       Amount: 2
     Outputs: []
     RequiredBaseResources: []

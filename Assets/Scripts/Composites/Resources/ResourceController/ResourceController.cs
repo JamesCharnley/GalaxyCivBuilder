@@ -208,7 +208,10 @@ public class ResourceController
     public List<Resource> GetFinalInOutValues()
     {
         Dictionary<EResource, Resource> resources = new Dictionary<EResource, Resource>();
-        resources = Outputs;
+        foreach(KeyValuePair<EResource, Resource> kvp in Outputs)
+        {
+            resources.Add(kvp.Key, kvp.Value);
+        }
 
         foreach (KeyValuePair<EResource, Resource> kvp in Inputs)
         {
