@@ -234,4 +234,16 @@ public class ResourceController
 
         return resChanges;
     }
+
+    public List<Resource> GetExcessResources()
+    {
+        List<Resource> excessResources = new();
+
+        foreach(KeyValuePair<EResource, Resource> kvp in ExcessOutputs)
+        {
+            excessResources.Add(kvp.Value);
+        }
+
+        return excessResources;
+    }
 }

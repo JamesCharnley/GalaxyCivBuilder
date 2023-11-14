@@ -6,6 +6,7 @@ using UnityEngine;
 public class ResourceMenuBuilder : MonoBehaviour
 {
     [SerializeField] private GameObject ResourceStatsPanel;
+    [SerializeField] private GameObject StoredResourceStatsPanel;
     [SerializeField] private GameObject StatsTextPrefab;
     public void InitialiseMenu(InteractableObject interactableObject)
     {
@@ -28,6 +29,23 @@ public class ResourceMenuBuilder : MonoBehaviour
                 }
 
             }
+
+            List<Resource> storedResources = ResController.ResourceControl.GetExcessResources();
+            foreach (Resource res in storedResources)
+            {
+                GameObject statPref = Instantiate(StatsTextPrefab);
+                statPref.transform.SetParent(StoredResourceStatsPanel.transform, false);
+                TMPro.TMP_Text text = statPref.GetComponent<TMPro.TMP_Text>();
+                if (res.Amount > 0)
+                {
+                    text.text = res.Name + ": +" + res.Amount.ToString();
+                }
+                else
+                {
+                    text.text = res.Name + ": " + res.Amount.ToString();
+                }
+
+            }
         }
     }
 
@@ -36,6 +54,10 @@ public class ResourceMenuBuilder : MonoBehaviour
         for(int i = ResourceStatsPanel.transform.childCount - 1; i >= 0; i--)
         {
             Destroy(ResourceStatsPanel.transform.GetChild(i).gameObject);
+        }
+        for (int i = StoredResourceStatsPanel.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(StoredResourceStatsPanel.transform.GetChild(i).gameObject);
         }
     }
 }
