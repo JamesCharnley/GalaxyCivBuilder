@@ -35,4 +35,8 @@ public class StarSystemRender : MonoBehaviour, IInteractableRender
             spawner.ActivateStarSystemView(StarSystemData);
         }
     }
+    public StarSystem GetStarSystemData()
+    {
+        return StarSystemData;
+    }
 }

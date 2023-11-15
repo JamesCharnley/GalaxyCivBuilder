@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 238588831}
   - component: {fileID: 238588833}
   m_Layer: 0
-  m_Name: PlanetGenerator
+  m_Name: World_Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,6 +409,7 @@ MonoBehaviour:
   StarSystemRenderPrefab: {fileID: 4508220086508697139, guid: f038eb9cf32d41b4dbdf1352e834c4f3, type: 3}
   interactableTemplates:
   - {fileID: 11400000, guid: 8bbecccc8d3808c48934aaba7877d398, type: 2}
+  StarSystemConnectionPrefab: {fileID: 5116216580653642161, guid: 8f317e2c0698de34e83bf2d16b61d229, type: 3}
 --- !u!1 &268243433
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,6 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a077e12f15e43a74dbc9a5dc3652ec21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraMoveSpeed: 50
 --- !u!1 &801526814
 GameObject:
   m_ObjectHideFlags: 0

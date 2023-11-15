@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float CameraMoveSpeed = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,13 @@ public class PlayerController : MonoBehaviour
         {
             LeftClick();
         }
+
+        float horAxis = Input.GetAxis("Horizontal");
+        float vertAxis = Input.GetAxis("Vertical");
+        if(horAxis != 0 || vertAxis != 0)
+        {
+            MoveCamera(horAxis, vertAxis);
+        }
     }
 
     void LeftClick()
@@ -37,5 +45,12 @@ public class PlayerController : MonoBehaviour
                 interactable.InteractAction();
             }
         }
+    }
+    void MoveCamera(float _x, float _y)
+    {
+        Vector3 dir = new Vector3(_x, _y, 0);
+        dir.Normalize();
+
+        Camera.main.transform.position += dir * CameraMoveSpeed * Time.deltaTime;
     }
 }

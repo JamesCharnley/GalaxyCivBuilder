@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    List<StarSystem> StarSystems = new();
     ResourceManager ResourceManager;
     int TotalDays = 0;
     int DayCounter = 0;
@@ -43,5 +44,10 @@ public class GameManager : MonoBehaviour
     {
         // Update import/export orders
         ResourceManager.UpdateResourceShipping();
+    }
+
+    public void RegisterStarSystem(StarSystem _starSystem)
+    {
+        StarSystems.Add(_starSystem);
     }
 }
