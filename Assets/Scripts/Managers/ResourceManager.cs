@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,10 @@ public class ResourceManager : MonoBehaviour
     public Dictionary<EResource, int> TotalResources = new Dictionary<EResource, int>();
 
     List<IResourceController> ResourceControllers = new List<IResourceController>();
+
+    List<ResourceOrder> ResourceOrders = new List<ResourceOrder>();
+    List<ResourceOrder> ResourceOrderTerminations = new List<ResourceOrder>();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -136,7 +141,15 @@ public class ResourceManager : MonoBehaviour
 
     public void UpdateResourceShipping()
     {
-        
+        // update all resource controllers import orders
+        foreach(IResourceController resCon in ResourceControllers)
+        {
+            resCon.ResourceControl.UpdateImportOrders(this);
+        }
+
+        // try execute import orders with exports
+
+        // update order terminations
     }
 
     public void UpdateTotalResources(List<Resource> _changes)
@@ -145,5 +158,40 @@ public class ResourceManager : MonoBehaviour
         {
             TotalResources[res.ResourceName] += res.Amount;
         }
+    }
+
+    public void AddResourceOrder(IResourceController _owner, Resource _order)
+    {
+        if(_owner == null)
+        {
+            return;
+        }
+
+        foreach(ResourceOrder order in ResourceOrders)
+        {
+            if(order.GetOwner() == _owner && order.GetOrder().ResourceName == _order.ResourceName)
+            {
+                _order.Amount = _order.Amount - order.GetOrder().Amount;
+                order.UpdateOrder(_order.Amount);
+                return;
+            }
+        }
+
+        ResourceOrder newOrder = new ResourceOrder(_owner, _order, this);
+        ResourceOrders.Add(newOrder);
+       
+    }
+
+    public void AddResourceOrderTermination(ResourceOrder _order)
+    {
+        ResourceOrderTerminations.Add(_order);
+    }
+    void TerminateResourceOrders()
+    {
+        foreach(ResourceOrder order in ResourceOrderTerminations)
+        {
+            ResourceOrders.Remove(order);
+        }
+        ResourceOrderTerminations.Clear();
     }
 }

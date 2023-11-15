@@ -13,6 +13,8 @@ public class Planet : HabitableObject, IResourceController, IBuildable, ITranspo
 
     //IResourceController interface implementation
     public ResourceController ResourceControl { get; set; }
+    
+    //ITransportController interface implementation
     public TransportController TransportControl { get; set; }
 
     public Planet(ResourceControllerTemplate _resourceControllerTemplate, BuildableTemplate _buildableTemplate, DisplayInfo _displayInfo, FRenderInfo _renderInfo) : base()
@@ -27,6 +29,12 @@ public class Planet : HabitableObject, IResourceController, IBuildable, ITranspo
         // ITransportController init
         TransportControl = new();
 
+        // Planet init
+        MenuType = EMenuType.Planet;
+        DisplayInformation = _displayInfo;
+        RenderInfo = _renderInfo;
+
+        // Build planet with testing template
         ResourceManager resourceManager = GameObject.FindObjectOfType<ResourceManager>();
         if (resourceManager != null)
         {
@@ -39,24 +47,9 @@ public class Planet : HabitableObject, IResourceController, IBuildable, ITranspo
                     ResourceControl.UpdateInputs(data.Inputs.ToList());
                     ResourceControl.UpdateOutputs(data.Outputs.ToList());
                     ResourceControl.UpdateOccupiedResources(data.RequiredBaseResources.ToList());
-                    Debug.Log("Added data to buildslot");
                 }
-                else
-                {
-                    Debug.LogWarning("Failed to get facility from FacilityDB");
-                }
-
             }
         }
-        else
-        {
-            Debug.LogWarning("ResourceManager is null");
-        }
-
-        // Planet init
-        MenuType = EMenuType.Planet;
-        DisplayInformation = _displayInfo;
-        RenderInfo = _renderInfo;
     }
 
 

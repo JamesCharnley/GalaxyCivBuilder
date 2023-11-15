@@ -27,19 +27,13 @@ public class ResourceController
     public Dictionary<EResource, Resource> Inputs = new Dictionary<EResource, Resource>();
     public Dictionary<EResource, Resource> Outputs = new Dictionary<EResource, Resource>();
     public Dictionary<EResource, Resource> ExcessOutputs = new Dictionary<EResource, Resource>();
+    public List<Resource> ImportsInTransit = new List<Resource>();
     public int ExcessOutputCapacity = 100;
     int totalExcessStored = 0;
-    //public List<ResourceInOut> Inputs { get; set; }
-    //public List<ResourceInOut> Outputs { get; set; }
-    //public List<RawResource> UsedRawResources { get; set; }
-
     IResourceController OwnerInterface { get; set; }
 
     public ResourceController(List<Resource> inputs, List<Resource> outputs, List<Resource> occupiedResources, List<Resource> baseResources, IResourceController ownerInterface)
     {
-        //Inputs = inputs;
-        //Outputs = outputs;
-        //UsedRawResources = usedRawResources;
 
         ResourceManager resManager = GameObject.FindObjectOfType<ResourceManager>();
 
@@ -248,5 +242,17 @@ public class ResourceController
         }
 
         return excessResources;
+    }
+
+    public void UpdateImportOrders(ResourceManager _manager)
+    {
+        List<Resource> excessResources = GetExcessResources();
+        foreach(Resource resource in excessResources)
+        {
+            if(resource.Amount < 0)
+            {
+                _manager.AddResourceOrder(OwnerInterface, resource);
+            }
+        }
     }
 }
