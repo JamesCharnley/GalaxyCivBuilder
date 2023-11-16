@@ -32,7 +32,11 @@ public class ResourceController
     int totalExcessStored = 0;
     IResourceController OwnerInterface { get; set; }
 
-    public ResourceController(List<Resource> inputs, List<Resource> outputs, List<Resource> occupiedResources, List<Resource> baseResources, IResourceController ownerInterface)
+    public ResourceController(List<Resource> inputs, 
+                              List<Resource> outputs, 
+                              List<Resource> occupiedResources, 
+                              List<Resource> baseResources, 
+                              IResourceController ownerInterface)
     {
 
         ResourceManager resManager = GameObject.FindObjectOfType<ResourceManager>();
