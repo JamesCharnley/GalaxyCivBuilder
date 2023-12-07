@@ -27,7 +27,13 @@ public enum EResource
     Tritium,
     Polymer,
     CarbonFibre,
-    DeuteriumTritium
+    DeuteriumTritium,
+    RawIron,
+    RawTitanium,
+    RawUranium,
+    RawWater,
+    RawLithium,
+    HabitableLand
 }
 
 [System.Serializable]

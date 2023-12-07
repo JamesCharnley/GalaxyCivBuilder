@@ -7,15 +7,25 @@ using System.ComponentModel.Design.Serialization;
 
 public enum EFacility
 {
-    SolarFarm,
-    FoodFarm,
-    WindFarm,
-    MetalMine,
-    RareMetalMine,
+    QuartzMine,
     CarbonMine,
-    SilicaMine,
+    IronMine,
+    TitaniumMine,
     UraniumMine,
     WaterExtractor,
+    LithiumMine,
+    FoodFarm,
+    SolarFarm,
+    WindFarm,
+    ThermalFarm,
+    Housing,
+    SiliconRefinery,
+    SteelRefinery,
+    UraniumRefinery,
+    DeuteriumRefinery,
+    TitaniumRefinery,
+    PolymerRefinery,
+    DeuteriumTritiumRefinery,
     NuclearPowerPlant,
     DomesticCargoHub
 }
