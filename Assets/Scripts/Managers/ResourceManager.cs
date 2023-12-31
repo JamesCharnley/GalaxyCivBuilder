@@ -33,7 +33,10 @@ public enum EResource
     RawUranium,
     RawWater,
     RawLithium,
-    HabitableLand
+    HabitableLand,
+    Money,
+    RawQuartz,
+    RawCarbon
 }
 
 [System.Serializable]
