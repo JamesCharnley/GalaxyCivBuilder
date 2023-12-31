@@ -27,7 +27,8 @@ public enum EFacility
     PolymerRefinery,
     DeuteriumTritiumRefinery,
     NuclearPowerPlant,
-    DomesticCargoHub
+    DomesticCargoHub,
+    TritiumRefinery
 }
 public class Buildable
 {
